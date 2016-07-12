@@ -92,21 +92,10 @@ function renderFullPage(html, preloadedState) {
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-
-        <link href="/global.css" rel="stylesheet"/>
-        <style>
-        body {
-          margin: 0;
-          font-family: sans-serif;
-        }
-        a {
-          color: hsl(200, 50%, 40%);
-          text-decoration: none;
-        }
-        </style>
       </head>
       <body>
-        <div id="wrapper"></div>
+        <div id="wrapper">
+        </div>
         <script>
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState)}
         </script>

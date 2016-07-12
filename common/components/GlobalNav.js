@@ -49,7 +49,7 @@ class GlobalNav extends Component {
                   <span className="icon-bar"></span>
                   <span className="icon-bar"></span>
               </button>
-              <Link className="navbar-brand" to="/calendar">Performance AI</Link>
+              <Link className="navbar-brand" to="/">Performance AI</Link>
           </div>
           <ul className="nav navbar-right top-nav">
               <li className="dropdown">
@@ -154,39 +154,25 @@ class GlobalNav extends Component {
           <div className="collapse navbar-collapse navbar-ex1-collapse">
               <ul className="nav navbar-nav side-nav">
                   <li className="active">
-                      <Link to="/calendar"><i className="fa fa-fw fa-dashboard"></i> Dashboard</Link>
+                      <Link to="/dashboard"><i className="fa fa-fw fa-dashboard"></i> Dashboard</Link>
                   </li>
                   <li>
-                      <Link to="/calendar"><i className="fa fa-fw fa-bar-chart-o"></i> Charts</Link>
+                      <Link to="/upload"><i className="fa fa-fw fa-bar-chart-o"></i> Upload</Link>
                   </li>
                   <li>
-                      <Link to="/calendar"><i className="fa fa-fw fa-table"></i> Tables</Link>
+                      <Link to="/summary"><i className="fa fa-fw fa-table"></i> Summary</Link>
                   </li>
                   <li>
-                      <Link to="/calendar"><i className="fa fa-fw fa-edit"></i> Forms</Link>
+                      <Link to="/tps"><i className="fa fa-fw fa-edit"></i> TPS</Link>
                   </li>
                   <li>
-                      <Link to="/calendar"><i className="fa fa-fw fa-desktop"></i> Bootstrap Elements</Link>
+                      <Link to="/memory"><i className="fa fa-fw fa-desktop"></i> Memory</Link>
                   </li>
                   <li>
-                      <Link to="/calendar"><i className="fa fa-fw fa-wrench"></i> Bootstrap Grid</Link>
+                      <Link to="/network"><i className="fa fa-fw fa-wrench"></i> Network</Link>
                   </li>
                   <li>
-                      <Link to="javascript:;" data-toggle="collapse" data-target="#demo"><i className="fa fa-fw fa-arrows-v"></i> Dropdown <i className="fa fa-fw fa-caret-down"></i></Link>
-                      <ul id="demo" className="collapse">
-                          <li>
-                              <Link to="/">Dropdown Item</Link>
-                          </li>
-                          <li>
-                              <Link to="/">Dropdown Item</Link>
-                          </li>
-                      </ul>
-                  </li>
-                  <li>
-                      <Link to="/calendar"><i className="fa fa-fw fa-file"></i> Blank Page</Link>
-                  </li>
-                  <li>
-                      <Link to="/calendar"><i className="fa fa-fw fa-dashboard"></i> RTL Dashboard</Link>
+                      <Link to="/about"><i className="fa fa-fw fa-file"></i> About</Link>
                   </li>
               </ul>
           </div>

@@ -2,17 +2,20 @@
 import React, { Component } from 'react'
 import Dashboard from './Dashboard'
 import GlobalNav from './GlobalNav'
-import Layout from '../layout/layout.js'
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <GlobalNav />
-        <div style={{ padding: 20 }}>
-          {this.props.children || <Dashboard courses={COURSES} />}
+        <div>
+          <GlobalNav />
+          <div id="page-wrapper">
+            <div className="container-fluid">
+              <div className="col-lg-12">
+                {this.props.children || <Dashboard courses={COURSES} />}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
     )
   }
 }

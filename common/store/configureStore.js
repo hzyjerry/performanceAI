@@ -1,10 +1,14 @@
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import rootReducer from '../reducers'
+import reducers from '../reducers'
+import { Router, Route, browserHistory } from 'react-router'
+import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 
 export default function configureStore(preloadedState) {
-  const store = createStore(
-    rootReducer,
+  const store = createStore(combineReducers({
+      ...reducers,
+      routing: routerReducer
+    }),
     preloadedState,
     applyMiddleware(thunk)
   )

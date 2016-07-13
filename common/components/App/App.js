@@ -1,7 +1,8 @@
-/*globals COURSES:true */
+/* Main Application Frame */
+
 import React, { Component } from 'react'
-import Dashboard from './Dashboard'
-import GlobalNav from './GlobalNav'
+import Dashboard from '../Dashboard/Dashboard'
+import GlobalNav from '../GlobalNav/GlobalNav'
 
 
 class App extends Component {
@@ -12,7 +13,7 @@ class App extends Component {
           <div id="page-wrapper">
             <div className="container-fluid">
               <div className="col-lg-12">
-                {this.props.children || <Dashboard courses={COURSES} />}
+                {this.props.children}
               </div>
             </div>
           </div>

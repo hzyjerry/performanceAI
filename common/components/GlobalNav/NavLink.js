@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 
 class NavLink extends React.Component {
 	render() {
-		console.log(this.props.upload)
 	  return (
 	    <li className={(this.props.active?"active": "") + ((!this.props.ready & !this.props.upload)? " disabled": "")}>
 	      <Link to={this.props.link}><i className={"fa fa-fw " + this.props.icon}></i> {this.props.name}</Link>

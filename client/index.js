@@ -12,8 +12,8 @@ import { syncHistoryWithStore } from 'react-router-redux'
 
 
 const preloadedState = window.__initialState__
-console.log(preloadedState)
 const store = configureStore(browserHistory, preloadedState)
+console.log(preloadedState)
 const history = syncHistoryWithStore(browserHistory, store)
 
 render(

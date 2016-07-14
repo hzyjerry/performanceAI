@@ -12,6 +12,8 @@ import webpackConfig from '../webpack.config'
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
+import { createMemoryHistory, match, RouterContext } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
 
 import configureStore from '../common/store/configureStore'
 import getRoutes from '../common/routes/routes'
@@ -26,9 +28,6 @@ app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: webpackConfig
 app.use(webpackHotMiddleware(compiler))
 
 app.use(Express.static(__dirname + '/../client'));
-
-// This is fired every time the server side receives a request
-app.use(handleRender)
 
 const HTML = ({ content, store }) => (
   <html>
@@ -59,19 +58,23 @@ const HTML = ({ content, store }) => (
       */}
     </head>
     <body>
-      <div id="wrapper">
-      </div>
+      <div id="wrapper" dangerouslySetInnerHTML={{ __html: content }}/>
       <script src="js/jquery.js"></script>
       <script src="js/plugins/morris/raphael.min.js"></script>
       <script src="js/plugins/morris/morris.min.js"></script>
       <script src="js/plugins/morris/morris-data.js"></script>
       <script src="js/bootstrap.min.js"></script>
+      <script dangerouslySetInnerHTML={{ __html: `window.__initialState__=${JSON.stringify(store.getState())};` }}/>
+
       {/* Project Compile */}
       <script src="/static/bundle.js"></script>
-      <script dangerouslySetInnerHTML={{ __html: `window.__initialState__=${JSON.stringify(store.getState())};` }}/>
     </body>
   </html>
 )
+
+// This is fired every time the server side receives a request
+app.use(handleRender)
+
 
 function handleRender(req, res) {
   // Query our mock API asynchronously
@@ -82,10 +85,16 @@ function handleRender(req, res) {
 
     const preloadedState = { counter,
                              upload: false}
-    const store = configureStore(preloadedState)
+    const memoryHistory = createMemoryHistory(req.url)
+    const store = configureStore(memoryHistory, preloadedState)
 
-    // For creating routerContext
-    const content = ""//renderToString()
+    const content = ""
+    /*renderToString(
+      <Provider store={store}>
+        <RouterContext {...renderProps}>
+        </RouterContext>
+      </Provider>
+    )*/
 
     res.send('<!doctype html>\n' + renderToString(<HTML content={content} store={store}/>))
   })

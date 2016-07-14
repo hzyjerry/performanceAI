@@ -1,16 +1,24 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import reducers from '../reducers'
-import { Router, Route, browserHistory } from 'react-router'
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+import * as reducers from '../reducers'
 
-export default function configureStore(preloadedState) {
+import { routerReducer, routerMiddleware } from 'react-router-redux'
+
+console.log(...reducers)
+
+export default function configureStore(history, preloadedState) {
   const store = createStore(combineReducers({
       ...reducers,
       routing: routerReducer
     }),
     preloadedState,
-    applyMiddleware(thunk)
+    compose(
+      applyMiddleware(
+        thunk,
+        routerMiddleware(history)
+      ),
+      typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
+    )
   )
 
   if (module.hot) {

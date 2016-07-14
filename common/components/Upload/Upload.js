@@ -1,6 +1,6 @@
 import React, {PropTypes } from 'react'
 import { connect } from 'react-redux'
-import upload from '../../actions'
+import { upload } from '../../actions'
 
 function Upload({onClick}) {
   return (
@@ -23,7 +23,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onClick: () => {
-      dispatch(upload)
+      dispatch(upload())
     }
   }
 }

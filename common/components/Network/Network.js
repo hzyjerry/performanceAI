@@ -12,4 +12,4 @@ class Network extends React.Component {
 
 }
 
-module.exports = Network
+export default Network

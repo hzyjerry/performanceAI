@@ -12,4 +12,4 @@ class Summary extends React.Component {
 
 }
 
-module.exports = Summary
+export default Summary

@@ -12,4 +12,4 @@ class TPS extends React.Component {
 
 }
 
-module.exports = TPS
+export default TPS

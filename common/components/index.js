@@ -5,24 +5,11 @@
  *
  */
 
-import App from './App/App'
-import About from './About/About'
-import Dashboard from './Dashboard/Dashboard'
-import Memory from './Memory/Memory'
-import Network from './Network/Network'
-import Summary from './Summary/Summary'
-import TPS from './TPS/TPS'
-import Upload from './Upload/Upload'
-import NotFound from './NotFound/NotFound'
-
-export {
-	App,
-	About,
-	Dashboard,
-	Memory,
-	Network,
-	Summary,
-	TPS,
-	Upload,
-	NotFound
-}
+export App from './App/App'
+export About from './About/About'
+export Dashboard from './Dashboard/Dashboard'
+export Memory from './Memory/Memory'
+export Network from './Network/Network'
+export Summary from './Summary/Summary'
+export TPS from './TPS/TPS'
+export Upload from './Upload/Upload'

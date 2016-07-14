@@ -5,11 +5,13 @@ var classNames = require('classnames');
 
 class NavLink extends React.Component {
 	render() {
-		var activeClass = classNames({'active': this.props.active, 'disabled': !this.props.ready & !this.props.upload})
-		var linkClass = classNames('fa', 'fa-fw', this.props.icon)
+		var {active, ready, upload, icon, name, link} = this.props
+
+		var activeClass = classNames({'active': active, 'disabled': !ready & !upload})
+		var linkClass = classNames('fa', 'fa-fw', icon)
 	  return (
 	    <li className={activeClass}>
-	      <Link to={this.props.link}><i className={linkClass}></i> {this.props.name}</Link>
+	      <Link to={link}><i className={linkClass}></i> {name}</Link>
 	    </li>
 	  )
 	}

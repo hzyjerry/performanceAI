@@ -12,4 +12,4 @@ class Memory extends React.Component {
 
 }
 
-module.exports = Memory
+export default Memory

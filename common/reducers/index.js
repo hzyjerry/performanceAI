@@ -1,5 +1,1 @@
-import upload from './upload'
-
-export {
-	upload
-}
+export upload from './upload'

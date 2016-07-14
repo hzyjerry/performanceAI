@@ -41,7 +41,7 @@ const HTML = ({ content, store }) => (
 
       <title>Performance AI - Automatic Performance Analyzer</title>
 
-      <link href="css/bootstrap.min.css" rel="stylesheet"/>
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
       {/* Custom CSS */}
       <link href="css/sb-admin.css" rel="stylesheet"/>
       {/* Morris Charts CSS */}
@@ -61,16 +61,14 @@ const HTML = ({ content, store }) => (
     <body>
       <div id="wrapper">
       </div>
-      <script dangerouslySetInnerHTML={{ __html: `window.__initialState__=${JSON.stringify(store.getState())};` }}/>
-
       <script src="js/jquery.js"></script>
-      <script src="js/bootstrap.min.js"></script>
-      {/* Morris Charts JavaScript */}
       <script src="js/plugins/morris/raphael.min.js"></script>
       <script src="js/plugins/morris/morris.min.js"></script>
       <script src="js/plugins/morris/morris-data.js"></script>
+      <script src="js/bootstrap.min.js"></script>
       {/* Project Compile */}
       <script src="/static/bundle.js"></script>
+      <script dangerouslySetInnerHTML={{ __html: `window.__initialState__=${JSON.stringify(store.getState())};` }}/>
     </body>
   </html>
 )
@@ -81,10 +79,9 @@ function handleRender(req, res) {
     // Read the counter from the request, if provided
     const params = qs.parse(req.query)
     const counter = parseInt(params.counter, 10) || apiResult || 0
-    const upload = false
 
     const preloadedState = { counter,
-                             upload}
+                             upload: false}
     const store = configureStore(preloadedState)
 
     // For creating routerContext

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
+import NavLink from './NavLink'
 
 const dark = 'hsl(200, 20%, 20%)'
 const light = '#fff'
@@ -153,27 +154,13 @@ class GlobalNav extends Component {
           </ul>
           <div className="collapse navbar-collapse navbar-ex1-collapse">
               <ul className="nav navbar-nav side-nav">
-                  <li className="active">
-                      <Link to="/dashboard"><i className="fa fa-fw fa-dashboard"></i> Dashboard</Link>
-                  </li>
-                  <li>
-                      <Link to="/upload"><i className="fa fa-fw fa-bar-chart-o"></i> Upload</Link>
-                  </li>
-                  <li>
-                      <Link to="/summary"><i className="fa fa-fw fa-table"></i> Summary</Link>
-                  </li>
-                  <li>
-                      <Link to="/tps"><i className="fa fa-fw fa-edit"></i> TPS</Link>
-                  </li>
-                  <li>
-                      <Link to="/memory"><i className="fa fa-fw fa-desktop"></i> Memory</Link>
-                  </li>
-                  <li>
-                      <Link to="/network"><i className="fa fa-fw fa-wrench"></i> Network</Link>
-                  </li>
-                  <li>
-                      <Link to="/about"><i className="fa fa-fw fa-file"></i> About</Link>
-                  </li>
+                  <NavLink active={true} icon="/fa-dashboard" name="Dashboard" link="/dashboard" ready={true}/>
+                  <NavLink active={false} icon="/fa-bar-chart-0" name="Upload" link="/upload" ready={true}/>
+                  <NavLink active={false} icon="/fa-table" name="Summary" link="/summary" ready={false}/>
+                  <NavLink active={false} icon="/fa-edit" name="TPS" link="/tps" ready={false}/>
+                  <NavLink active={false} icon="/fa-desktop" name="Memory" link="/memory" ready={false}/>
+                  <NavLink active={false} icon="/fa-wrench" name="Network" link="/network" ready={false}/>
+                  <NavLink active={false} icon="/fa-file" name="About" link="/about" ready={false}/>
               </ul>
           </div>
       </nav>

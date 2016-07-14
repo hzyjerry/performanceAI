@@ -1,14 +1,12 @@
 
 import {UPLOAD} from '../actions'
 
-const initialState = {
-	upload: false
-}
+const initialState = false
 
 export default function upload(state = initialState, action) {
   switch (action.type) {
     case UPLOAD:
-      return state
+      return true
     default:
       return state
   }

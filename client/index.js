@@ -53,13 +53,11 @@ const component = (
 );
 
 
-const wrapper = document.getElementById('wrapper')
-
 render(
   <Provider store={store} key="provider">
     {component}
   </Provider>, 
-  wrapper)
+  rootElement)
 
 
 /*render((

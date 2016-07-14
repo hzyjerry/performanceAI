@@ -7,7 +7,6 @@
 
 import App from './App/App'
 import About from './About/About'
-import Calendar from './Calendar/Calendar'
 import Dashboard from './Dashboard/Dashboard'
 import Memory from './Memory/Memory'
 import Network from './Network/Network'
@@ -19,7 +18,6 @@ import NotFound from './NotFound/NotFound'
 export {
 	App,
 	About,
-	Calendar,
 	Dashboard,
 	Memory,
 	Network,

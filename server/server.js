@@ -45,6 +45,7 @@ const HTML = ({ content, store }) => (
       <link href="css/sb-admin.css" rel="stylesheet"/>
       {/* Morris Charts CSS */}
       <link href="css/plugins/morris.css" rel="stylesheet"/>
+      <link href="css/custom.css" rel="stylesheet"/>
       {/* Custom Fonts */}
       <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
@@ -64,10 +65,14 @@ const HTML = ({ content, store }) => (
       <script src="js/plugins/morris/morris.min.js"></script>
       <script src="js/plugins/morris/morris-data.js"></script>
       <script src="js/bootstrap.min.js"></script>
+      <script src="js/plugins/loadingoverlay/loadingoverlay.min.js"></script>
+      <script src="js/plugins/loadingoverlay/loadingoverlay_progress.min.js"></script>
       <script dangerouslySetInnerHTML={{ __html: `window.__initialState__=${JSON.stringify(store.getState())};` }}/>
 
       {/* Project Compile */}
       <script src="/static/bundle.js"></script>
+      <script>
+        </script>
     </body>
   </html>
 )

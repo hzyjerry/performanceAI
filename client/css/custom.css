@@ -1,0 +1,19 @@
+#progress_test {
+    display         : block;
+    margin          : 20px;
+    font            : 12pt/1.2 sans-serif;
+    font-weight     : bold;
+    padding         : 6px;
+}
+.container {
+    display     : inline-block;
+    margin-left : 20px;
+    width       : 500px;
+    height      : 500px;
+    border      : 1px solid #008800;
+    font        : 14pt/1.2 sans-serif;
+    text-align  : center;
+    padding     : 10px;
+    color       : #303030;
+    background  : #ffdd88;
+}

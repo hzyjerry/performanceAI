@@ -26,6 +26,7 @@
     "classnames": "^2.2.5",
     "express": "^4.13.3",
     "history": "^2.0.0",
+    "jquery-loading-overlay": "^1.0.2",
     "qs": "^4.0.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",

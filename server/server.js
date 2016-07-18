@@ -2,6 +2,7 @@
 
 import path from 'path'
 import Express from 'express'
+import bodyParser from 'body-parser'
 import qs from 'qs'
 
 import webpack from 'webpack'
@@ -26,6 +27,7 @@ const port = 3000
 const compiler = webpack(webpackConfig)
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath }))
 app.use(webpackHotMiddleware(compiler))
+app.use(bodyParser.json());
 
 app.use(Express.static(__dirname + '/../client'));
 
@@ -116,8 +118,10 @@ app.post('/upload', function (req, res, next) {
   setTimeout(function () {
     console.log(req.body);
     console.log("Received upload call");
-    res.json(req.body);
-  }, 5000)
+    res.json({
+      results: ['good', 'bad']
+    });
+  }, 1000)
 });
 
 

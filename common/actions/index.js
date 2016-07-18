@@ -6,7 +6,6 @@ export const ANALYZE_REQUEST = 'ANALYZE_REQUEST'
 export const ANALYZE_FAILURE = 'ANALYZE_FAILURE'
 export const ANALYZE_SUCCESS = 'ANALYZE_SUCCESS'
 
-
 var request = require('superagent');
 
 
@@ -25,17 +24,17 @@ function analyzeRequest() {
   }
 }
 
-function analyzeReceive(json) {
+function analyzeReceive(res) {
   return {
     type: ANALYZE_SUCCESS,
-    results: json
+    results: res.results
   }
 }
 
-function analyzeFailure(error) {
+function analyzeFailure(res) {
   return {
     type: ANALYZE_FAILURE,
-    error: error
+    error: res.error
   }
 }
 
@@ -48,9 +47,12 @@ export function analyzeFiles() {
       .set('Accept', 'application/json')
       .end(function(err, res) {
         if (err) {
+          // Connection error
           dispatch(analyzeFailure(err))
+        } else if (res.body.err) {
+          dispatch(analyzeFailure(res.body))
         } else {
-          dispatch(analyzeReceive(res))
+          dispatch(analyzeReceive(res.body))
           dispatch(upload())
         }
       });

@@ -15,24 +15,24 @@ export default function analyzedResult(state = initialFetchingState, action) {
 	        image       : "",
 	        fontawesome : "fa fa-spinner fa-spin"
 	      })
-	      return {
+	      return Object.assign({}, state, {
 	      	isFetching: true,
 	      	didInvalidate: false
-	      }
+	      })
 	    case ANALYZE_FAILURE:
 	      $("#overlay").LoadingOverlay("hide");
-	      return {
+	      return  Object.assign({}, state, {
 	      	isFetching: false,
 	      	didInvalidate: true,
 	      	error: action.error
-	      }
+	      })
 	    case ANALYZE_SUCCESS:
 	      $("#overlay").LoadingOverlay("hide");
-	      return {
+	      return Object.assign({}, state, {
 	      	isFetching: false,
 	      	didInvalidate: false,
 	      	results: action.results
-	      }
+	      })
 	    default:
 	      return state
 	}

@@ -5,7 +5,6 @@ import { routerReducer, routerMiddleware } from 'react-router-redux'
 
 
 export default function configureStore(history, preloadedState) {
-  // console.log(preloadedState)
   const store = createStore(combineReducers({
       ...reducers,
       routing: routerReducer

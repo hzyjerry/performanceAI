@@ -2,48 +2,57 @@ export const SET_COUNTER = 'SET_COUNTER'
 export const INCREMENT_COUNTER = 'INCREMENT_COUNTER'
 export const DECREMENT_COUNTER = 'DECREMENT_COUNTER'
 export const UPLOAD = 'UPLOAD'
+export const ANALYZE_REQUEST = 'ANALYZE_REQUEST'
+export const ANALYZE_FAILURE = 'ANALYZE_FAILURE'
+export const ANALYZE_SUCCESS = 'ANALYZE_SUCCESS'
 
-export function upload() {
+
+var request = require('superagent');
+
+
+/* Notify all the app components that file has been successfully uploaded, analyzed
+   and received 
+*/
+function upload() {
   return {
     type: UPLOAD,
   }
 }
 
-export function set(value) {
+function analyzeRequest() {
   return {
-    type: SET_COUNTER,
-    payload: value
+    type: ANALYZE_REQUEST,
   }
 }
 
-export function increment() {
+function analyzeReceive(json) {
   return {
-    type: INCREMENT_COUNTER
+    type: ANALYZE_SUCCESS,
+    results: json
   }
 }
 
-export function decrement() {
+function analyzeFailure(error) {
   return {
-    type: DECREMENT_COUNTER
+    type: ANALYZE_FAILURE,
+    error: error
   }
 }
 
-export function incrementIfOdd() {
-  return (dispatch, getState) => {
-    const { counter } = getState()
-
-    if (counter % 2 === 0) {
-      return
-    }
-
-    dispatch(increment())
-  }
-}
-
-export function incrementAsync(delay = 1000) {
-  return dispatch => {
-    setTimeout(() => {
-      dispatch(increment())
-    }, delay)
+export function analyzeFiles() {
+  return function (dispatch) {
+    dispatch(analyzeRequest())
+    return request
+      .post('/upload')
+      .send({ name: 'Manny', species: 'cat' })
+      .set('Accept', 'application/json')
+      .end(function(err, res) {
+        if (err) {
+          dispatch(analyzeFailure(err))
+        } else {
+          dispatch(analyzeReceive(res))
+          dispatch(upload())
+        }
+      });
   }
 }

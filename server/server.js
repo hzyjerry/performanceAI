@@ -81,17 +81,24 @@ const HTML = ({ content, store }) => (
 app.get('/*', handleRender)
 
 function handleRender(req, res) {
-  console.log('Handling render')
+  // console.log('Handling render')
   // Query our mock API asynchronously
   fetchCounter(apiResult => {
     // Read the counter from the request, if provided
     const params = qs.parse(req.query)
-    const counter = parseInt(params.counter, 10) || apiResult || 0
 
-    const preloadedState = { counter,
-                             upload: false}
+    const preloadedState = { 
+      uploadedFile: false, 
+      analyzedResult: {
+        isFetching: false,
+        didInvalidate: false,
+        results: {},
+        error: {}
+      }
+    }
     const memoryHistory = createMemoryHistory(req.url)
     const store = configureStore(memoryHistory, preloadedState)
+    // console.log(store.getState())
 
     const content = ""
     /*renderToString(

@@ -1,7 +1,6 @@
 import React, {PropTypes, Component} from 'react'
 import { connect } from 'react-redux'
-import { upload } from '../../actions'
-var request = require('superagent');
+import { analyzeFiles } from '../../actions'
 
 class Upload extends Component {
   render() {
@@ -12,25 +11,6 @@ class Upload extends Component {
         <button onClick={() => onClick()} type="button" className="btn btn-lg btn-default" id="progress_test">Upload</button>
       </div>
     )
-  }  
-
-  componentDidMount() {
-    $("#progress_test").on("click", function Example1(event){    
-      $("#overlay").LoadingOverlay("show", {
-        image       : "",
-        fontawesome : "fa fa-spinner fa-spin"
-      });
-
-      request
-        .post('/upload')
-        .send({ name: 'Manny', species: 'cat' })
-        .set('Accept', 'application/json')
-        .end(function(err, res) {
-          console.log("received response")
-          console.log(res)
-          $("#overlay").LoadingOverlay("hide");
-        });
-    })
   }
 }
 
@@ -46,7 +26,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onClick: () => {
-      dispatch(upload())
+      dispatch(analyzeFiles())
     }
   }
 }

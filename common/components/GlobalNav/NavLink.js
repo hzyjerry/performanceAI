@@ -10,11 +10,15 @@ class NavLink extends React.Component {
 	  var activeClass = classNames({'active': active, 'disabled': !ready & !upload})
 	  var linkClass = classNames('fa', 'fa-fw', icon)
 	  var dest = (!ready & !upload)? "": link
-	  var onclick = (!ready & !upload)? "": e => e.preventDefault()
+	  if (!ready & !upload) {
+	  	dest = <Link to={dest} onClick={e => e.preventDefault()}><i className={linkClass}></i> {name}</Link>
+	  } else {
+	  	dest = <Link to={dest}><i className={linkClass}></i> {name}</Link>
+	  }
 
 	  return (
 	    <li className={activeClass}>
-	      <Link to={dest} onclick={onclick}><i className={linkClass}></i> {name}</Link>
+	      {dest}
 	    </li>
 	  )
 	}

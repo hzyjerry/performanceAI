@@ -78,7 +78,7 @@ const HTML = ({ content, store }) => (
 )
 
 // This is fired every time the server side receives a request
-app.get('/', handleRender)
+app.get('/*', handleRender)
 
 function handleRender(req, res) {
   console.log('Handling render')

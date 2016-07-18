@@ -66,7 +66,7 @@ const HTML = ({ content, store }) => (
       <script src="js/plugins/morris/morris-data.js"></script>
       <script src="js/bootstrap.min.js"></script>
       <script src="js/plugins/loadingoverlay/loadingoverlay.min.js"></script>
-      <script src="js/plugins/loadingoverlay/loadingoverlay_progress.min.js"></script>
+      {/* <script src="js/plugins/loadingoverlay/loadingoverlay_progress.min.js"></script> */}
       <script dangerouslySetInnerHTML={{ __html: `window.__initialState__=${JSON.stringify(store.getState())};` }}/>
 
       {/* Project Compile */}
@@ -78,10 +78,10 @@ const HTML = ({ content, store }) => (
 )
 
 // This is fired every time the server side receives a request
-app.use(handleRender)
-
+app.get('/', handleRender)
 
 function handleRender(req, res) {
+  console.log('Handling render')
   // Query our mock API asynchronously
   fetchCounter(apiResult => {
     // Read the counter from the request, if provided
@@ -104,6 +104,15 @@ function handleRender(req, res) {
     res.send('<!doctype html>\n' + renderToString(<HTML content={content} store={store}/>))
   })
 }
+
+app.post('/upload', function (req, res, next) {
+  setTimeout(function () {
+    console.log(req.body);
+    console.log("Received upload call");
+    res.json(req.body);
+  }, 5000)
+});
+
 
 app.listen(port, (error) => {
   if (error) {

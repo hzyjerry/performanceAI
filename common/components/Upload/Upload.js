@@ -1,6 +1,7 @@
 import React, {PropTypes, Component} from 'react'
 import { connect } from 'react-redux'
 import { upload } from '../../actions'
+var request = require('superagent');
 
 class Upload extends Component {
   render() {
@@ -15,12 +16,20 @@ class Upload extends Component {
 
   componentDidMount() {
     $("#progress_test").on("click", function Example1(event){    
-      $.LoadingOverlay("show");
+      $("#overlay").LoadingOverlay("show", {
+        image       : "",
+        fontawesome : "fa fa-spinner fa-spin"
+      });
 
-      // Hide it after 3 seconds
-      setTimeout(function(){
-          $.LoadingOverlay("hide");
-      }, 3000);
+      request
+        .post('/upload')
+        .send({ name: 'Manny', species: 'cat' })
+        .set('Accept', 'application/json')
+        .end(function(err, res) {
+          console.log("received response")
+          console.log(res)
+          $("#overlay").LoadingOverlay("hide");
+        });
     })
   }
 }

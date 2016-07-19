@@ -11,9 +11,9 @@ class NavLink extends React.Component {
 	  var linkClass = classNames('fa', 'fa-fw', icon)
 	  var dest = (!ready & !uploadedFile)? "": link
 	  if (!ready & !uploadedFile) {
-	  	dest = <Link to={dest} onClick={e => e.preventDefault()}><i className={linkClass}></i> {name}</Link>
+	  	dest = <Link to={dest} activeClassName="active" onClick={e => e.preventDefault()}><i className={linkClass}></i> {name}</Link>
 	  } else {
-	  	dest = <Link to={dest}><i className={linkClass}></i> {name}</Link>
+	  	dest = <Link to={dest} activeClassName="active"><i className={linkClass}></i> {name}</Link>
 	  }
 
 	  return (

@@ -10,7 +10,7 @@ class Upload extends Component {
       <div>
         <h2>Upload</h2>
         <DropzoneDemo />
-        <button onClick={() => onClick()} type="button" className="btn btn-lg btn-default" id="progress_test">Upload</button>
+        <button onClick={() => onClick(this.props)} type="button" className="btn btn-lg btn-default" id="progress_test">Upload</button>
       </div>
     )
   }
@@ -27,8 +27,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onClick: () => {
-      dispatch(analyzeFiles())
+    onClick: (props) => {
+      dispatch(analyzeFiles(props))
     }
   }
 }

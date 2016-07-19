@@ -22,18 +22,18 @@ var DropzoneDemo = React.createClass({
 
     render: function () {
       return (
+        <div>
+          <Dropzone onDrop={this.onDrop}>
+            <div>Try dropping some files here, or click to select files to upload.</div>
+          </Dropzone>
           <div>
-            <Dropzone onDrop={this.onDrop}>
-              <div>Try dropping some files here, or click to select files to upload.</div>
-            </Dropzone>
-            <div>
-              <ul>
-                {this.state.files.map(function(file) {
-                  return <li> {file.name}</li>
-                })} 
-              </ul>
-            </div>
+            <ul>
+              {this.state.files.map(function(file) {
+                return <li> {file.name}</li>
+              })} 
+            </ul>
           </div>
+        </div>
       );
     }
 });

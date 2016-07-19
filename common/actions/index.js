@@ -7,6 +7,7 @@ export const ANALYZE_FAILURE = 'ANALYZE_FAILURE'
 export const ANALYZE_SUCCESS = 'ANALYZE_SUCCESS'
 
 var request = require('superagent');
+import { browserHistory } from 'react-router'
 
 
 /* Notify all the app components that file has been successfully uploaded, analyzed
@@ -38,7 +39,7 @@ function analyzeFailure(res) {
   }
 }
 
-export function analyzeFiles() {
+export function analyzeFiles(props) {
   return function (dispatch) {
     dispatch(analyzeRequest())
     return request
@@ -54,6 +55,7 @@ export function analyzeFiles() {
         } else {
           dispatch(analyzeReceive(res.body))
           dispatch(upload())
+          browserHistory.push('/summary');
         }
       });
   }

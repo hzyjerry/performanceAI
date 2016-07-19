@@ -7,7 +7,7 @@ import '../common/stubs/COURSES'
 
 import getRoutes from '../common/routes/routes'
 
-import { Route, Router, browserHistory } from 'react-router'
+import { Route, Router, browserHistory, Redirect } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 
 
@@ -18,6 +18,8 @@ const history = syncHistoryWithStore(browserHistory, store)
 
 render(
   <Provider store={store} key="provider">
-    <Router history={browserHistory} routes={getRoutes(store)} />
+    <Router history={browserHistory}>
+    {getRoutes(store)}
+    </Router>
   </Provider>, 
   document.getElementById('wrapper'))

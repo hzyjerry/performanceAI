@@ -1,4 +1,3 @@
-
 import {ANALYZE_REQUEST, ANALYZE_FAILURE, ANALYZE_SUCCESS} from '../actions'
 
 const initialFetchingState = {

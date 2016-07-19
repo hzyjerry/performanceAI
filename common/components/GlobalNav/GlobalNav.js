@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router'
+import { Link, IndexLink } from 'react-router'
 import NavLink from './NavLink'
 
 const dark = 'hsl(200, 20%, 20%)'
@@ -154,13 +154,13 @@ class GlobalNav extends Component {
           </ul>
           <div className="collapse navbar-collapse navbar-ex1-collapse">
               <ul className="nav navbar-nav side-nav">
-                  <NavLink active={false} icon="fa-dashboard" name="Dashboard" link="/dashboard" ready={true}/>
-                  <NavLink active={false} icon="fa-bar-chart-o" name="Upload" link="/upload" ready={true}/>
-                  <NavLink active={false} icon="fa-table" name="Summary" link="/summary" ready={false}/>
-                  <NavLink active={false} icon="fa-edit" name="TPS" link="/tps" ready={false}/>
-                  <NavLink active={false} icon="fa-desktop" name="Memory" link="/memory" ready={false}/>
-                  <NavLink active={false} icon="fa-wrench" name="Network" link="/network" ready={false}/>
-                  <NavLink active={false} icon="fa-file" name="About" link="/about" ready={false}/>
+                <NavLink icon="fa-dashboard" name="Dashboard" link="/dashboard" ready={true}/>
+                <NavLink icon="fa-bar-chart-o" name="Upload" link="/upload" ready={true}/>
+                <NavLink icon="fa-table" name="Summary" link="/summary" ready={false}/>
+                <NavLink icon="fa-edit" name="TPS" link="/tps" ready={false}/>
+                <NavLink icon="fa-desktop" name="Memory" link="/memory" ready={false}/>
+                <NavLink icon="fa-wrench" name="Network" link="/network" ready={false}/>
+                <NavLink icon="fa-file" name="About" link="/about" ready={false}/>
               </ul>
           </div>
       </nav>

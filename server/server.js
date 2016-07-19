@@ -14,7 +14,6 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { createMemoryHistory, match, RouterContext } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
 
 import configureStore from '../common/store/configureStore'
 import getRoutes from '../common/routes/routes'

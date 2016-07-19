@@ -1,29 +1,41 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
-var classNames = require('classnames');
+import classNames from 'classnames'
+import activeComponent from 'react-router-active-component'
+
+var NavLi = activeComponent('li')
 
 class NavLink extends React.Component {
 	render() {
-	  var {active, ready, uploadedFile, icon, name, link} = this.props
+	  var {ready, icon, uploadedFile, name, link} = this.props
 
-	  var activeClass = classNames({'active': active, 'disabled': !ready & !uploadedFile})
-	  var linkClass = classNames('fa', 'fa-fw', icon)
+	  var disabled = classNames({'disabled': !ready & !uploadedFile})
+	  var iconClass = classNames('fa', 'fa-fw', icon)
 	  var dest = (!ready & !uploadedFile)? "": link
+	  var linkProps
 	  if (!ready & !uploadedFile) {
-	  	dest = <Link to={dest} activeClassName="active" onClick={e => e.preventDefault()}><i className={linkClass}></i> {name}</Link>
+	  	linkProps = {onClick: e => e.preventDefault(), activeClassName: "active"}
 	  } else {
-	  	dest = <Link to={dest} activeClassName="active"><i className={linkClass}></i> {name}</Link>
+	  	linkProps = {}
 	  }
 
 	  return (
-	    <li className={activeClass}>
-	      {dest}
-	    </li>
+	    <NavLi to={dest} linkProps={linkProps} className={disabled}>
+	  		<i className={iconClass}></i> {name}
+	  	</NavLi>
 	  )
 	}
 }
 
+
+function mapStateToProps(state, ownProps) {
+  return {
+  	uploadedFile: state.uploadedFile
+  };
+}
+
+
 export default connect(
-	state => ({ uploadedFile: state.uploadedFile })
+	mapStateToProps
 )(NavLink)

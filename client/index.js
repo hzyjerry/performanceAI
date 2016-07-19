@@ -18,8 +18,8 @@ const history = syncHistoryWithStore(browserHistory, store)
 
 render(
   <Provider store={store} key="provider">
-    <Router history={browserHistory}>
-    {getRoutes(store)}
+    <Router history={history}>
+      {getRoutes(store)}
     </Router>
   </Provider>, 
   document.getElementById('wrapper'))

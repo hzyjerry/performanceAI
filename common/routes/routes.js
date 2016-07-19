@@ -5,6 +5,7 @@ import {
   App,
   About,
   Dashboard,
+  
   Memory,
   Network,
   Summary,
@@ -16,8 +17,8 @@ import {
 export default (store) => {
   return (
     <Route component={App}>
-      <Redirect from="/" to="/dashboard" />
       { /* Home (main) route */ }
+      <Redirect from="/" to="/dashboard"/>
       <IndexRoute component={Dashboard}/>
 
       { /* Routes */ }

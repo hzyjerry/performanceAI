@@ -12,7 +12,7 @@ class App extends Component {
           <GlobalNav />
           <div id="page-wrapper">
             <div className="container-fluid">
-              <div className="col-lg-12" id="overlay">
+              <div id="overlay">
                 {this.props.children}
               </div>
             </div>

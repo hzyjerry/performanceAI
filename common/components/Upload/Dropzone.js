@@ -22,16 +22,27 @@ var DropzoneDemo = React.createClass({
 
     render: function () {
       return (
-        <div>
-          <Dropzone onDrop={this.onDrop}>
-            <div>Try dropping some files here, or click to select files to upload.</div>
+        <div className="row">
+          <Dropzone onDrop={this.onDrop} style={{
+            width: '100%',
+            align: 'center',
+            height: '30px',
+            'border-width': '1px',
+            'border-color': "#666",
+            'border-style':"dashed",
+            'border-radius':"2px"
+          }}>
+            <div>{"  Try dropping some files here, or click to select files to upload."}</div>
           </Dropzone>
-          <div>
+          <div className="col-xs-8">
             <ul>
               {this.state.files.map(function(file) {
                 return <li> {file.name}</li>
               })} 
             </ul>
+          </div>
+          <div className="col-xs-4">
+            <button onClick={() => this.props.click(this.props)} type="button" className="btn btn-lg btn-default" id="progress_test">Upload</button>
           </div>
         </div>
       );

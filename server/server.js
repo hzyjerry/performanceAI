@@ -48,6 +48,7 @@ const HTML = ({ content, store }) => (
       <link href="css/custom.css" rel="stylesheet"/>
       {/* Custom Fonts */}
       <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" rel="stylesheet" type="text/css" />
 
       {/* 
       HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
@@ -66,6 +67,9 @@ const HTML = ({ content, store }) => (
       <script src="js/plugins/morris/morris-data.js"></script>
       <script src="js/bootstrap.min.js"></script>
       <script src="js/plugins/loadingoverlay/loadingoverlay.min.js"></script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
       {/* <script src="js/plugins/loadingoverlay/loadingoverlay_progress.min.js"></script> */}
       <script dangerouslySetInnerHTML={{ __html: `window.__initialState__=${JSON.stringify(store.getState())};` }}/>
 

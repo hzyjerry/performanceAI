@@ -1,6 +1,7 @@
 import React, {PropTypes, Component} from 'react'
 import { connect } from 'react-redux'
 import { analyzeFiles } from '../../actions'
+import DropzoneDemo from './Dropzone'
 
 class Upload extends Component {
   render() {
@@ -8,6 +9,7 @@ class Upload extends Component {
     return (
       <div>
         <h2>Upload</h2>
+        <DropzoneDemo />
         <button onClick={() => onClick()} type="button" className="btn btn-lg btn-default" id="progress_test">Upload</button>
       </div>
     )

@@ -160,7 +160,7 @@ class GlobalNav extends Component {
                 <NavLink icon="fa-edit" name="TPS" link="/tps" ready={false}/>
                 <NavLink icon="fa-desktop" name="Memory" link="/memory" ready={false}/>
                 <NavLink icon="fa-wrench" name="Network" link="/network" ready={false}/>
-                <NavLink icon="fa-file" name="About" link="/about" ready={false}/>
+                <NavLink icon="fa-file" name="About" link="/about" ready={true}/>
               </ul>
           </div>
       </nav>

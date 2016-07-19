@@ -16,7 +16,6 @@ import { Provider } from 'react-redux'
 import { createMemoryHistory, match, RouterContext } from 'react-router'
 
 import configureStore from '../common/store/configureStore'
-import getRoutes from '../common/routes/routes'
 import { fetchCounter } from '../common/api/counter'
 
 const app = new Express()

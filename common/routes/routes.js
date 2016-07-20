@@ -11,7 +11,9 @@ import {
   Summary,
   TPS,
   Upload,
-  NotFound
+  Disk,
+  NotFound,
+  Issue
 } from '../components'
 
 export default (store) => {
@@ -27,7 +29,10 @@ export default (store) => {
       <Route path="/summary" component={UploadSucceed(Summary)}/>
       <Route path="/memory" component={UploadSucceed(Memory)}/>
       <Route path="/network" component={UploadSucceed(Network)}/>
-      <Route path="/tps" component={UploadSucceed(TPS)}/>
+      <Route path="/disk" component={UploadSucceed(Disk)}/>
+      <Route path="/tps" component={UploadSucceed(TPS)}>
+        <Route path=":id" component={UploadSucceed(Issue)}/>
+      </Route>
       <Route path="/about" component={About}/>
 
       { /* Catch all route */ }

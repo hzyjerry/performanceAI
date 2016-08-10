@@ -17,32 +17,32 @@ DROP TABLE IF EXISTS builds;
 DROP TABLE IF EXISTS user_teams;
 DROP TABLE IF EXISTS user_builds;
 DROP TABLE IF EXISTS build_annotations;
+DROP TABLE IF EXISTS behaviour;
+DROP TABLE IF EXISTS suggestions;
 
 CREATE TABLE IF NOT EXISTS users (
 	username CHAR(20) PRIMARY KEY, -- username can be made longer later
     name CHAR(64),
-    is_admin BOOLEAN,
     password CHAR(20),
-	create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	team INT references team(team_id),
 );
 
  CREATE TABLE IF NOT EXISTS teams (
-     message_id INT,
-     receiver CHAR(20) REFERENCES users,
-     sender CHAR(20) REFERENCES users,
-     message TEXT,
-     time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-     is_read BOOLEAN,
-     PRIMARY KEY (message_id, receiver)
+    team_id INT AUTO_INCREMENT PRIMARY KEY,
+    name CHAR(64),
+    is_admin BOOLEAN,
+    create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
  );
 
  CREATE TABLE IF NOT EXISTS annotations (
-     achiev_id INT AUTO_INCREMENT PRIMARY KEY,
-	 name CHAR(20),
-     type INT,
-     quantity INT,
-     description TEXT,
-     iconfile CHAR(64)
+    annotate_id INT AUTO_INCREMENT PRIMARY KEY,
+	name CHAR(20),
+	sent_by char(20) references users(username),
+	written_by char(20) references users(username),
+    request TEXT,
+    response TEXT,
+	create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
  );
 
  CREATE TABLE IF NOT EXISTS user_teams (

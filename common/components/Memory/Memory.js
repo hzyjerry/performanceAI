@@ -30,7 +30,7 @@ class Memory extends React.Component {
 					<div className="col-lg-12">
                         <div className="panel panel-green">
                             <div className="panel-heading">
-                                <h3 className="panel-title">Diagnostics</h3>
+                                <h3 className="panel-title">Diawgnostics</h3>
                             </div>
                             <div className="panel-body">
                                 No issues with memory performance. Looks like everything is good to go.

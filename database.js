@@ -46,26 +46,26 @@ CREATE TABLE IF NOT EXISTS users (
  );
 
  CREATE TABLE IF NOT EXISTS user_teams (
-     username CHAR(20) REFERENCES users,
-     achiev_id INT REFERENCES achievements,
-     time_acquired TIMESTAMP,
-     PRIMARY KEY (username, achiev_id)
+	username CHAR(20) REFERENCES users,
+	achiev_id INT REFERENCES achievements,
+	time_acquired TIMESTAMP,
+	PRIMARY KEY (username, achiev_id)
  );
 
  CREATE TABLE IF NOT EXISTS user_builds (
-     user_1 CHAR(20) REFERENCES users,
-     user_2 CHAR(20) REFERENCES users,
-     PRIMARY KEY (user_1, user_2)
+	user_1 CHAR(20) REFERENCES users,
+	user_2 CHAR(20) REFERENCES users,
+	PRIMARY KEY (user_1, user_2)
  );
 
 CREATE TABLE IF NOT EXISTS build_annotations (
-    username CHAR(20) REFERENCES users,
-    quiz_id INT REFERENCES quiz,
-    score INT,
-    is_graded BOOLEAN,
-    time_completed TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    duration TIME,
-    PRIMARY KEY (username, quiz_id, time_completed)
+	username CHAR(20) REFERENCES users,
+	quiz_id INT REFERENCES quiz,
+	score INT,
+	is_graded BOOLEAN,
+	time_completed TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	duration TIME,
+	PRIMARY KEY (username, quiz_id, time_completed)
 );
 
 INSERT INTO users (username, name, password, is_admin)

@@ -1,0 +1,35 @@
+Version: detailed
+
+10.0.1.221_monQuery
+
+
+ *** SYSTEM RESOURCE METRICS ***
+CPU:
+  CPU%: Avg 50.507 , 80-pctile 62.28 , 95-pctile 80
+  iowait%: Avg 0.0152396 , 80-pctile 0.00 , 95-pctile 0.00
+  steal%: Avg 33.2783 , 80-pctile 45.31 , 95-pctile 54.25
+  max CPU load: 0.87
+TOP:
+  -- the busiest PIDs parsed from top.out --
+2275 's avg CPU%: 79.8703 (95th percentile 96.4 , 80th percentile 95.0 )
+  sample entries:
+  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND            
+ 2275 root      20   0 13.4g 778m  16m S 95.8 20.8  25:46.04 java               
+ 2275 root      20   0 13.8g 791m  16m S 96.0 21.1  29:12.56 java               
+Memory:
+  memused%: Avg 63.3286 , 80-pctile 63.70 , 95-pctile 64.04
+  kbcached: Avg 906890 , 80-pctile 907576 , 95-pctile 907916
+  kbdirty: Avg compute_avg.sh: ERROR! The input file is "logs/10.0.1.221_monQuery/mem_kbdirty.parsed" either not found or empty. , 80-pctile compute_pctile.sh: ERROR! The input file is "logs/10.0.1.221_monQuery/mem_kbdirty.parsed" either not found or missing percentile input. , 95-pctile compute_pctile.sh: ERROR! The input file is "logs/10.0.1.221_monQuery/mem_kbdirty.parsed" either not found or missing percentile input.
+Network:
+ eth0
+  rxKB/s: Avg 7.27109 , 80-pctile 11.95 , 95-pctile 37.88
+  txKB/s: Avg 19.0232 , 80-pctile 29.02 , 95-pctile 91.37
+ lo
+  rxKB/s: Avg 7.13332 , 80-pctile 2.59 , 95-pctile 43.31
+  txKB/s: Avg 7.13332 , 80-pctile 2.59 , 95-pctile 43.31
+Avg total sockets: 163.241  Avg TCP sockets: 15.9241
+Disk:
+  xvda1
+  tps: Avg 1.06766 , 80-pctile 1.64 , 95-pctile 2.48
+  await: Avg 1.34708 , 80-pctile 2.00 , 95-pctile 6.53
+  util%: Avg 0.214647 , 80-pctile 0.33 , 95-pctile 1.21 

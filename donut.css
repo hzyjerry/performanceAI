@@ -1,0 +1,12 @@
+.donut {
+  width: 220px;
+  height: 220px;
+}
+
+
+/* don't do anything fancy when hovering */
+
+.donut .c3-chart-arcs-title {
+  fill: black;
+  font-size: 4.5em;
+}

@@ -103,7 +103,7 @@ function createDonutChart(data, testName, donut_id) {
     .attr("dy", "0.15em")
 
   // add percentage symbol
-  d3.select(".c3-chart-arcs")
+  d3.select(".donut .c3-chart-arcs")
     .append("text")
     .text("%")
     .attr("font-size", "15px")

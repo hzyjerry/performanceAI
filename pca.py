@@ -47,9 +47,9 @@ def plot_pca(data):
     clr1 =  '#2026B2'
     fig = MPL.figure()
     ax1 = fig.add_subplot(111)
-    data_resc, data_orig = PCA(data)
+    data_resc, data_orig, _ = PCA(data)
     ax1.plot(data_resc[:, 0], data_resc[:, 1], '.', mfc=clr1, mec=clr1)
     MPL.show()
 
-data = np.random.randint(10,size=(10,3))
+data = np.random.randint(10,size=(100,10))
 results = PCA(data)

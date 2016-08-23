@@ -7,3 +7,5 @@ es
 coverage
 _book
 demo/*
+client/v1/*
+client/v2/*

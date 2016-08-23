@@ -61,12 +61,12 @@ const HTML = ({ content, store }) => (
     </head>
     <body>
       <div id="wrapper" dangerouslySetInnerHTML={{ __html: content }}/>
-      <script src="js/jquery.js"></script>
-      <script src="js/plugins/morris/raphael.min.js"></script>
-      <script src="js/plugins/morris/morris.min.js"></script>
-      <script src="js/plugins/morris/morris-data.js"></script>
-      <script src="js/bootstrap.min.js"></script>
-      <script src="js/plugins/loadingoverlay/loadingoverlay.min.js"></script>
+      <script src="/js/jquery.js"></script>
+      <script src="/js/plugins/morris/raphael.min.js"></script>
+      <script src="/js/plugins/morris/morris.min.js"></script>
+      <script src="/js/plugins/morris/morris-data.js"></script>
+      <script src="/js/bootstrap.min.js"></script>
+      <script src="/js/plugins/loadingoverlay/loadingoverlay.min.js"></script>
 
       <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>

@@ -42,12 +42,12 @@ const HTML = ({ content, store }) => (
 
       <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
       {/* Custom CSS */}
-      <link href="css/sb-admin.css" rel="stylesheet"/>
+      <link href="/css/sb-admin.css" rel="stylesheet"/>
       {/* Morris Charts CSS */}
-      <link href="css/plugins/morris.css" rel="stylesheet"/>
-      <link href="css/custom.css" rel="stylesheet"/>
+      <link href="/css/plugins/morris.css" rel="stylesheet"/>
+      <link href="/css/custom.css" rel="stylesheet"/>
       {/* Custom Fonts */}
-      <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+      <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
       <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" rel="stylesheet" type="text/css" />
 
       {/* 

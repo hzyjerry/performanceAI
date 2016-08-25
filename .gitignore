@@ -9,3 +9,7 @@ _book
 demo/*
 client/v1/*
 client/v2/*
+client/css/*
+client/js/*
+client/fonts/*
+client/font-awesome/*

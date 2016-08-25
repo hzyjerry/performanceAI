@@ -6,6 +6,7 @@
  */
 
 export App from './App/App'
+export AppV2 from './App/AppV2'
 export About from './About/About'
 export Dashboard from './Dashboard/Dashboard'
 export Memory from './Memory/Memory'
@@ -15,3 +16,9 @@ export TPS from './TPS/TPS'
 export Upload from './Upload/Upload'
 export Disk from './Disk/Disk'
 export Issue from './Issue/Issue'
+export Application from './Application/Application'
+export Analytics from './Analytics/Analytics'
+
+export SummaryUser from './User/SummaryUser'
+export TimeUser from './User/TimeUser'
+export StatsUser from './User/StatsUser'

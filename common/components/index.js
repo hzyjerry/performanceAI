@@ -20,5 +20,6 @@ export Application from './Application/Application'
 export Analytics from './Analytics/Analytics'
 
 export SummaryUser from './User/SummaryUser'
+export SummaryUserOverview from './User/SummaryUserOverview'
 export TimeUser from './User/TimeUser'
 export StatsUser from './User/StatsUser'

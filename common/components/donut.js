@@ -143,9 +143,7 @@ export function setUpDonut() {
   createDonutChart(mem_used, "CPU", "mem_chart1")
   createDonutChart(disk_util, "CPU", "disk_chart2")
 
-  $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
-            alert('The new tab is about to be shown.');
-  });
+  
   createDonutChart(cpu_util, "CPU", "cpu_chart1_detail")
   createDonutChart(cpu_iowait, "CPU", "cpu_chart2_detail")
   createDonutChart(mem_used, "CPU", "mem_chart1_detail")

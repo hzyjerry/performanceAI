@@ -13,6 +13,8 @@ import {
   Network,
   Summary,
   SummaryUser,
+  SummaryUserOverview,
+  SummaryUserDetailed,
   StatsUser,
   TimeUser,
   TPS,
@@ -36,7 +38,7 @@ export default (store) => {
         <Route path="summary" component={UploadSucceed(Summary)}/>
         <Route path="memory" component={UploadSucceed(Memory)}/>
         <Route path="network" component={UploadSucceed(Network)}/>
-        <Route path="disk" component={UploadSucceed(Disk)}/>
+        <Route path="disk" componeant={UploadSucceed(Disk)}/>
         <Route path="tps" component={UploadSucceed(TPS)}>
           <Route path=":id" component={UploadSucceed(Issue)}/>
         </Route>
@@ -51,7 +53,10 @@ export default (store) => {
           <Route path="application" component={Application}/>
           <Route path="upload" component={Upload}/>
           <Route path="analytics" component={Analytics}>
-            <Route path="summary" component={SummaryUser}/>
+            <Route path="summary" component={SummaryUser}>
+              <Route path="overview" component={SummaryUserOverview}/>
+              <Route path="detailed" component={SummaryUserDetailed}/>
+            </Route>
             <Route path="stats" component={StatsUser}/>
             <Route path="time" component={TimeUser}/>
           </Route>

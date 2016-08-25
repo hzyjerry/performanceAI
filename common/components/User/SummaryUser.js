@@ -1,7 +1,8 @@
 import React, {PropTypes, Component} from 'react'
 import { connect } from 'react-redux'
-import {setUpDonut} from '../donut'
-import {setUpChart} from '../chart'
+import { browserHistory, Router, Route, Link } from 'react-router'
+import { Nav, NavItem} from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 
 class SummaryUser extends Component {
   render() {
@@ -25,166 +26,23 @@ class SummaryUser extends Component {
         </div>
         <div>
 
-          <ul className="nav nav-tabs" role="tablist">
-            <li role="presentation" className="active"><a href="#overview" aria-controls="home" role="tab" data-toggle="tab"> Overview </a></li>
-            <li role="presentation"><a href="#detailed" aria-controls="profile" role="tab" data-toggle="tab"> Detailed </a></li>
-          </ul>
+          <Nav bsStyle="tabs" activeKey="1" onSelect={this.handleSelect}>
+            <LinkContainer to={{ pathname: "/v2/user/analytics/summary/overview"}}>
+              <NavItem eventKey="1">Overview</NavItem>
+            </LinkContainer>
+            <LinkContainer to={{ pathname: "/v2/user/analytics/summary/detailed"}}>
+              <NavItem eventKey="2">Detailed</NavItem>
+            </LinkContainer>
+          </Nav>
 
-          <br/> 
-
-          <div className="tab-content">
-            <div role="tabpanel" className="tab-pane fade in active" id="overview">
-                <div className="panel panel-default">
-                    <div className="panel-heading">
-                        <ol className="breadcrumb" style={{"marginBottom":0,"padding":0}}>
-                                <li>
-                                    <i className="fa fa-dashboard"></i>  <a href="index.html">Benchmark APIPlatform Build #400</a>
-                                </li>
-                                <li className="active">
-                                    <i className="fa fa-desktop"></i> 10.0.1.221_monQuery
-                                </li>
-                            </ol>
-                    </div>
-                    <div className="panel-body">
-                        <div className="col-md-6">
-                            <div className="panel-heading">
-                                <h3 className="page-header" style={{"margin":"20px 0 10px"}}>CPU Performance</h3>
-                            </div>
-                            <div className="panel-body">
-                                <div className="col-md-6">
-                                    <div className="donut" id="cpu_chart1"></div>
-                                </div>
-                                <div className="col-md-6">
-                                    <div className="donut" id="cpu_chart2"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div className="panel-heading">
-                                <h3 className="page-header" style={{"margin":"20px 0 10px"}}>Memory Performance</h3>
-                            </div>
-                            <div className="panel-body">
-                                <div className="col-md-12">
-                                    <div className="donut" id="mem_chart1"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-6">
-                            <div className="panel-heading">
-                                <h3 className="page-header" style={{"margin":"20px 0 10px"}}>Disk Response</h3>
-                            </div>
-                            <div className="panel-body">
-                                <div className="col-md-12">
-                                    <div className="chart" id="disk_chart1" style={{width: "500px",height: "230px"}}></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="col-md-4">
-                            <div className="panel-heading">
-                                <h3 className="page-header" style={{"margin":"20px 0 10px"}}>Disk Utility</h3>
-                            </div>
-                            <div className="panel-body">
-                                <div className="col-md-12">
-                                    <div className="donut" id="disk_chart2"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-12">
-                            <div className="panel-heading">
-                                <h3 className="page-header" style={{"margin":"20px 0 10px"}}>Time Series</h3>
-                            </div>
-                            <div className="panel-body">
-                                <div className="col-md-10">
-                                    <div className="chart overview-chart" id="overview-chart"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
-                </div>
-            </div>
-
-            <div role="tabpanel" className="tab-pane fade" id="detailed">
-              <div className="panel panel-default">
-                  <div className="panel-heading">
-                      <ol className="breadcrumb" style={{"marginBottom":0,"padding":0}}>
-                              <li>
-                                  <i className="fa fa-dashboard"></i>  <a href="index.html">Benchmark APIPlatform Build #400</a>
-                              </li>
-                              <li className="active">
-                                  <i className="fa fa-desktop"></i> 10.0.1.221_monQuery
-                              </li>
-                          </ol>
-                  </div>
-                  <div className="panel-body">
-                      <div className="col-md-6">
-                          <div className="panel-heading">
-                              <h3 className="page-header" style={{"margin":"20px 0 10px"}}>CPU Performance</h3>
-                          </div>
-                          <div className="panel-body">
-                              <div className="col-md-6">
-                                  <div className="donut" id="cpu_chart1_detail"></div>
-                              </div>
-                              <div className="col-md-6">
-                                  <div className="donut" id="cpu_chart2_detail"></div>
-                              </div>
-                          </div>
-                      </div>
-                      <div className="col-md-4">
-                          <div className="panel-heading">
-                              <h3 className="page-header" style={{"margin":"20px 0 10px"}}>Memory Performance</h3>
-                          </div>
-                          <div className="panel-body">
-                              <div className="col-md-12">
-                                  <div className="donut" id="mem_chart1_detail"></div>
-                              </div>
-                          </div>
-                      </div>
-                      <div className="col-md-6">
-                          <div className="panel-heading">
-                              <h3 className="page-header" style={{"margin":"20px 0 10px"}}>Disk Response</h3>
-                          </div>
-                          <div className="panel-body">
-                              <div className="col-md-12">
-                                  <div className="chart" id="disk_chart1_detail" style={{width: "500px",height: "230px"}}></div>
-                              </div>
-                          </div>
-                      </div>
-
-                      <div className="col-md-4">
-                          <div className="panel-heading">
-                              <h3 className="page-header" style={{"margin":"20px 0 10px"}}>Disk Utility</h3>
-                          </div>
-                          <div className="panel-body">
-                              <div className="col-md-12">
-                                  <div className="donut" id="disk_chart2_detail"></div>
-                              </div>
-                          </div>
-                      </div>
-                      <div className="col-md-12">
-                          <div className="panel-heading">
-                              <h3 className="page-header" style={{"margin":"20px 0 10px"}}>Time Series</h3>
-                          </div>
-                          <div className="panel-body">
-                              <div className="col-md-10">
-                                  <div className="chart overview-chart" id="overview-chart_detail"></div>
-                              </div>
-                          </div>
-                      </div>
-                  </div> 
-              </div>
-            </div>
+          <br/>
+          <div>
+            {this.props.children}
           </div>
         </div>
 
       </div>
     )
-  }
-
-  componentDidMount() {
-    setUpDonut()
-    setUpChart()
-    console.log(123)
   }
 }
 

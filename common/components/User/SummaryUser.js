@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { browserHistory, Router, Route, Link } from 'react-router'
 import { Nav, NavItem} from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { RouteTransition } from 'react-router-transition';
 
 import './summary.css'
@@ -53,7 +52,7 @@ class SummaryUser extends Component {
             atEnter={{ opacity: 0 }}
             atLeave={{ opacity: 0 }}
             atActive={{ opacity: 1 }}
-            runOnMount={true}
+            runOnMount={false}
           >
             {this.props.children}
           </RouteTransition>

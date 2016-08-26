@@ -15,7 +15,6 @@ import {
   SummaryUser,
   SummaryUserOverview,
   SummaryUserDetailed,
-  SummaryUserIndex,
   StatsUser,
   TimeUser,
   TPS,

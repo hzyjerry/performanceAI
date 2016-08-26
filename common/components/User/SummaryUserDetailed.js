@@ -5,16 +5,17 @@ import {setUpChart} from '../chart'
 
 class SummaryUserDetailed extends Component {
   render() {
+    return (
       <div className="panel panel-default">
           <div className="panel-heading">
               <ol className="breadcrumb" style={{"marginBottom":0,"padding":0}}>
-                      <li>
-                          <i className="fa fa-dashboard"></i>  <a href="index.html">Benchmark APIPlatform Build #400</a>
-                      </li>
-                      <li className="active">
-                          <i className="fa fa-desktop"></i> 10.0.1.221_monQuery
-                      </li>
-                  </ol>
+                  <li>
+                      <i className="fa fa-dashboard"></i>  <a href="index.html">Benchmark APIPlatform Build #400</a>
+                  </li>
+                  <li className="active">
+                      <i className="fa fa-desktop"></i> 10.0.1.221_monQuery
+                  </li>
+              </ol>
           </div>
           <div className="panel-body">
               <div className="col-md-6">
@@ -73,6 +74,7 @@ class SummaryUserDetailed extends Component {
               </div>
           </div> 
       </div>
+    )
   }
 
   componentDidMount() {

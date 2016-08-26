@@ -1,5 +1,5 @@
 import React from 'react';
-import {IndexRoute, Route, Redirect} from 'react-router';
+import {IndexRoute, Route, Redirect, IndexRedirect} from 'react-router';
 import UploadSucceed from '../components/UploadSucceed/UploadSucceed'
 
 import {
@@ -15,6 +15,7 @@ import {
   SummaryUser,
   SummaryUserOverview,
   SummaryUserDetailed,
+  SummaryUserIndex,
   StatsUser,
   TimeUser,
   TPS,
@@ -54,6 +55,7 @@ export default (store) => {
           <Route path="upload" component={Upload}/>
           <Route path="analytics" component={Analytics}>
             <Route path="summary" component={SummaryUser}>
+              <IndexRedirect to="overview"/>
               <Route path="overview" component={SummaryUserOverview}/>
               <Route path="detailed" component={SummaryUserDetailed}/>
             </Route>

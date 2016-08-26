@@ -27,7 +27,13 @@ module.exports = {
           presets: [ 'react-hmre' ]
         }
       },
-      { test: /\.css$/, loader: 'style!css' }
+      {
+        test: /\.css$/,
+        loaders: [
+            'style?sourceMap',
+            'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
+        ]
+      }
     ]
   }
 }

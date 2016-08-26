@@ -21,5 +21,7 @@ export Analytics from './Analytics/Analytics'
 
 export SummaryUser from './User/SummaryUser'
 export SummaryUserOverview from './User/SummaryUserOverview'
+export SummaryUserDetailed from './User/SummaryUserDetailed'
+export SummaryUserIndex from './User/SummaryUserIndex'
 export TimeUser from './User/TimeUser'
 export StatsUser from './User/StatsUser'

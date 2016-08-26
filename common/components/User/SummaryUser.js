@@ -3,10 +3,22 @@ import { connect } from 'react-redux'
 import { browserHistory, Router, Route, Link } from 'react-router'
 import { Nav, NavItem} from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import { RouteTransition } from 'react-router-transition';
+
+import './summary.css'
+
+
+const Index = () => (
+  <div className="Image">
+    <h1>Index</h1>
+    <p>Animations with React Router are not different than any other animation.</p>
+  </div>
+)
 
 class SummaryUser extends Component {
   render() {
-    const { onClick } = this.props
+    const pathname = this.props.location.pathname
     return (
       <div>
         <div className="row">
@@ -36,9 +48,15 @@ class SummaryUser extends Component {
           </Nav>
 
           <br/>
-          <div>
+          <RouteTransition
+            pathname={this.props.location.pathname}
+            atEnter={{ opacity: 0 }}
+            atLeave={{ opacity: 0 }}
+            atActive={{ opacity: 1 }}
+            runOnMount={true}
+          >
             {this.props.children}
-          </div>
+          </RouteTransition>
         </div>
 
       </div>

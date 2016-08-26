@@ -1,7 +1,6 @@
 import React, {PropTypes, Component} from 'react'
 import { connect } from 'react-redux'
-import {setUpDonut} from '../donut'
-import {setUpChart} from '../chart'
+import setUpOverview from './setUpOverview'
 
 class SummaryUserOverview extends Component {
   render() {
@@ -9,13 +8,13 @@ class SummaryUserOverview extends Component {
       <div className="panel panel-default">
           <div className="panel-heading">
               <ol className="breadcrumb" style={{"marginBottom":0,"padding":0}}>
-                      <li>
-                          <i className="fa fa-dashboard"></i>  <a href="index.html">Benchmark APIPlatform Build #400</a>
-                      </li>
-                      <li className="active">
-                          <i className="fa fa-desktop"></i> 10.0.1.221_monQuery
-                      </li>
-                  </ol>
+                <li>
+                    <i className="fa fa-dashboard"></i>  <a href="index.html">Benchmark APIPlatform Build #400</a>
+                </li>
+                <li className="active">
+                    <i className="fa fa-desktop"></i> 10.0.1.221_monQuery
+                </li>
+              </ol>
           </div>
           <div className="panel-body">
               <div className="col-md-6">
@@ -24,10 +23,10 @@ class SummaryUserOverview extends Component {
                   </div>
                   <div className="panel-body">
                       <div className="col-md-6">
-                          <div className="donut" id="cpu_chart1"></div>
+                          <div className="donut overview" id="cpu-util"></div>
                       </div>
                       <div className="col-md-6">
-                          <div className="donut" id="cpu_chart2"></div>
+                          <div className="donut overview" id="cpu-iowait"></div>
                       </div>
                   </div>
               </div>
@@ -37,7 +36,7 @@ class SummaryUserOverview extends Component {
                   </div>
                   <div className="panel-body">
                       <div className="col-md-12">
-                          <div className="donut" id="mem_chart1"></div>
+                          <div className="donut overview" id="mem-used"></div>
                       </div>
                   </div>
               </div>
@@ -47,7 +46,7 @@ class SummaryUserOverview extends Component {
                   </div>
                   <div className="panel-body">
                       <div className="col-md-12">
-                          <div className="chart" id="disk_chart1" style={{width: "500px",height: "230px"}}></div>
+                          <div className="chart overview" id="disk-response-overview" style={{width: "500px",height: "230px"}}></div>
                       </div>
                   </div>
               </div>
@@ -58,7 +57,7 @@ class SummaryUserOverview extends Component {
                   </div>
                   <div className="panel-body">
                       <div className="col-md-12">
-                          <div className="donut" id="disk_chart2"></div>
+                          <div className="donut overview" id="disk-util"></div>
                       </div>
                   </div>
               </div>
@@ -68,7 +67,7 @@ class SummaryUserOverview extends Component {
                   </div>
                   <div className="panel-body">
                       <div className="col-md-10">
-                          <div className="chart overview-chart" id="overview-chart"></div>
+                          <div className="chart overview" id="aggregate"></div>
                       </div>
                   </div>
               </div>
@@ -78,8 +77,7 @@ class SummaryUserOverview extends Component {
   }
 
   componentDidMount() {
-    setUpDonut()
-    setUpChart()
+    setUpOverview()
   }
 }
 

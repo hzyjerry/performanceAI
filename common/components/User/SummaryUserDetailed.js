@@ -1,7 +1,6 @@
 import React, {PropTypes, Component} from 'react'
 import { connect } from 'react-redux'
-import {setUpDonut} from '../donut'
-import {setUpChart} from '../chart'
+import setUpDetailed from './setUpDetailed'
 
 class SummaryUserDetailed extends Component {
   render() {
@@ -24,10 +23,10 @@ class SummaryUserDetailed extends Component {
                   </div>
                   <div className="panel-body">
                       <div className="col-md-6">
-                          <div className="donut" id="cpu_chart1_detail"></div>
+                          <div className="donut detailed" id="cpu-util"></div>
                       </div>
                       <div className="col-md-6">
-                          <div className="donut" id="cpu_chart2_detail"></div>
+                          <div className="donut detailed" id="cpu-iowait"></div>
                       </div>
                   </div>
               </div>
@@ -37,7 +36,7 @@ class SummaryUserDetailed extends Component {
                   </div>
                   <div className="panel-body">
                       <div className="col-md-12">
-                          <div className="donut" id="mem_chart1_detail"></div>
+                          <div className="donut detailed" id="mem-used"></div>
                       </div>
                   </div>
               </div>
@@ -47,7 +46,7 @@ class SummaryUserDetailed extends Component {
                   </div>
                   <div className="panel-body">
                       <div className="col-md-12">
-                          <div className="chart" id="disk_chart1_detail" style={{width: "500px",height: "230px"}}></div>
+                          <div className="chart detailed" id="disk-response-detailed" style={{width: "500px",height: "230px"}}></div>
                       </div>
                   </div>
               </div>
@@ -58,7 +57,7 @@ class SummaryUserDetailed extends Component {
                   </div>
                   <div className="panel-body">
                       <div className="col-md-12">
-                          <div className="donut" id="disk_chart2_detail"></div>
+                          <div className="donut detailed" id="disk-util"></div>
                       </div>
                   </div>
               </div>
@@ -68,7 +67,7 @@ class SummaryUserDetailed extends Component {
                   </div>
                   <div className="panel-body">
                       <div className="col-md-10">
-                          <div className="chart overview-chart" id="overview-chart_detail"></div>
+                          <div className="chart detailed" id="aggregate"></div>
                       </div>
                   </div>
               </div>
@@ -78,8 +77,7 @@ class SummaryUserDetailed extends Component {
   }
 
   componentDidMount() {
-    setUpDonut()
-    setUpChart()
+    setUpDetailed()
   }
 }
 

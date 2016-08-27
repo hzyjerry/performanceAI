@@ -4,7 +4,6 @@ import setUpOverview from './setUpOverview'
 
 class SummaryAdminOverview extends Component {
   render() {
-    console.log(123)
     return (
       <div className="panel panel-default">
           <div className="panel-heading">

@@ -3,7 +3,6 @@ import React from 'react'
 class Analytics extends React.Component {
 
   render() {
-    console.log("analytics")
     return (
       <div className="row">
         <div className="col-lg-12">

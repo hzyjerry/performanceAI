@@ -17,7 +17,6 @@ const Index = () => (
 
 class SummaryAdmin extends Component {
   render() {
-    console.log('summary admin')
     const pathname = this.props.location.pathname
     return (
       <div>

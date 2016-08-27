@@ -15,6 +15,9 @@ import {
   SummaryUser,
   SummaryUserOverview,
   SummaryUserDetailed,
+  SummaryAdmin,
+  SummaryAdminOverview,
+  SummaryAdminDetailed,
   StatsUser,
   TimeUser,
   TPS,
@@ -65,11 +68,17 @@ export default (store) => {
           { /* Catch all route */ }
           <Route path="*" component={NotFound} status={404} />
         </Route>
-        <Route path="admin" component={Dashboard}>
+        <Route path="admin">
           <Route path="dashboard" component={Dashboard}/>
           <Route path="application" component={Application}/>
           <Route path="upload" component={Upload}/>
-          <Route path="analytics" component={Analytics}/>
+          <Route path="analytics" component={Analytics}>
+            <Route path="summary" component={SummaryAdmin}>
+              <IndexRedirect to="overview"/>
+              <Route path="overview" component={SummaryAdminOverview}/>
+              <Route path="detailed" component={SummaryAdminDetailed}/>
+            </Route>
+          </Route>
           <Route path="about" component={About}/>
           { /* Catch all route */ }
           <Route path="*" component={NotFound} status={404} />

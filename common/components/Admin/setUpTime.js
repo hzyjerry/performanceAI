@@ -116,11 +116,6 @@ function getSetupFunction(data) {
       setTimeout(function() {
         $('.selected').goTo()
       }, 500)
-      /*
-      setTimeout(function() {
-        $( "#plot2" ).fadeOut()
-      }, 3000)
-      */
     }
 
     function undoSelect() {

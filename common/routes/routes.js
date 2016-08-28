@@ -30,7 +30,7 @@ import {
 
 export default (store) => {
   return (
-    <Route component={App}>
+    <Route>
       <Route path="/v1" component={App}>
         { /* Home (main) route */ }
         <Redirect from="/" to="/dashboard"/>

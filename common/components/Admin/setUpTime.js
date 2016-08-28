@@ -29,6 +29,21 @@ function getSetupFunction(data) {
         }
     })(jQuery);
 
+    // Plug in used for switching subplot color
+    jQuery(function(){
+      $('.clickable').on('click',function(){
+          var parent = $(this).parent().parent()
+          if (parent.hasClass('panel-green')) {
+            parent.removeClass('panel-green', 300).addClass('panel-red', 300)
+          } else {
+            parent.removeClass('panel-red', 300).addClass('panel-green', 300)
+          }
+          // var effect = $(this).data('effect');
+          //    $(this).closest('.panel')[effect]();
+        })
+      })
+
+    // Data selection code
     var selected = []
 
     function isEqual(newSelect) {
@@ -78,13 +93,16 @@ function getSetupFunction(data) {
         var domPlotId = 'plot-breakdown-' + dataId
         var domBlockId = 'block-' + dataId
         $("#plot-breakdown").append('\
-          <div class="col-md-6 col-md-offset-3" id="' + domBlockId + '">\
-            <div style="position:absolute; top:0; right:0; textAlign:right;"}}>\
-              <button type="button" class="btn btn-default btn-circle">\
-                <i class="fa fa-times"></i>\
-              </button>\
+          <div class="col-md-6" id="' + domBlockId + '">\
+            <div class="panel panel-green">\
+              <div class="panel-heading">\
+                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i>Using Fade Out</h3>\
+                <!-- Watch Out: Here We must use the effect name in the data tag-->\
+                <span class="pull-right clickable" data-effect="fadeOut"><i class="fa fa-thumb-tack"></i></span>\
+              </div>\
+            <div class="panel-body">\
+              <div class="plot" id="' + domPlotId + '"></div>\
             </div>\
-            <div class="plot" id="' + domPlotId + '"></div>\
           </div>\
           ')
         confirmedSelection.push(dataId)

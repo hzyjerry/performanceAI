@@ -2,6 +2,8 @@ import React, {PropTypes, Component} from 'react'
 import { connect } from 'react-redux'
 import setUpTime from './setUpTime'
 
+import './time.css'
+
 class TimeSeriesAdmin extends Component {
   render() {
     return (

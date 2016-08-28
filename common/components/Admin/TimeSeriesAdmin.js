@@ -28,16 +28,40 @@ class TimeSeriesAdmin extends Component {
             </div>
           </div>
         </div>
-        <br/>
-        <div className="row" id="plot-breakdown">
+
+        <div className="row" id="plot-macro">
           <div className="col-md-6" id="">
             <div className="panel panel-default">
               <div className="panel-heading">
                 <h3 className="panel-title"><i className="fa fa-long-arrow-right"></i>Healthy</h3>
-                <span className="pull-right clickable" data-effect="fadeOut"><i className="fa fa-thumb-tack"></i></span>
               </div>
               <div className="panel-body">
-                <div className="plot" id="' + domPlotId + '"></div>
+                <div className="list-group">
+                    <a href="#" className="list-group-item">
+                        <span className="badge">System</span>
+                        <i className="fa fa-fw fa-calendar"></i> Calendar updated
+                    </a>
+                    <a href="#" className="list-group-item">
+                        <span className="badge">System</span>
+                        <i className="fa fa-fw fa-calendar"></i> Calendar updated
+                    </a>
+                    <a href="#" className="list-group-item">
+                        <span className="badge">Wai Ip</span>
+                        <i className="fa fa-fw fa-money"></i> Invoice 653 has been paid
+                    </a>
+                    <a href="#" className="list-group-item">
+                        <span className="badge">Wai Ip</span>
+                        <i className="fa fa-fw fa-user"></i> A new user has been added
+                    </a>
+                    <a href="#" className="list-group-item">
+                        <span className="badge">Naseem</span>
+                        <i className="fa fa-fw fa-truck"></i> Order 392 shipped
+                    </a>
+                    <a href="#" className="list-group-item">
+                        <span className="badge">Lucianno</span>
+                        <i className="fa fa-fw fa-comment"></i> Commented on a post
+                    </a>
+                </div>
               </div>
             </div>
           </div>
@@ -50,8 +74,11 @@ class TimeSeriesAdmin extends Component {
             <button type="submit" className="btn btn-default">Submit Button</button>
             <button type="reset" className="btn btn-default">Reset Button</button>
           </div>
+        </div>
 
-          <br/>
+        <br/>
+
+        <div className="row" id="plot-breakdown">
         </div>
       </div>
     )

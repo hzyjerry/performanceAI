@@ -55,6 +55,13 @@ function getSetupFunction(data) {
                 draggable: true,
                 grouped: true
             }
+        },
+        axis: {
+          y: {
+            tick: {
+              format: d3.format('.4')
+            }
+          }
         }
     });
 
@@ -90,6 +97,13 @@ function getSetupFunction(data) {
                     getPlainArray(plotAllData.selected(allData[i].id))
                 ],
                 type: 'spline'
+            },
+            axis: {
+              y: {
+                tick: {
+                  format: d3.format('.4')
+                }
+              }
             }
         });
         $("#" + domPlotId).append(newChart.element)
@@ -117,7 +131,6 @@ function getSetupFunction(data) {
           var domBlockId = 'block-' + dataId
           $('#' + domPlotId).children().remove()
           $('#' + domBlockId).remove()
-          console.log(domBlockId)
         }
         plotAllData.unselect()
         confirmedSelection = []

@@ -29,20 +29,6 @@ function getSetupFunction(data) {
         }
     })(jQuery);
 
-    // Plug in used for switching subplot color
-    jQuery(function(){
-      $('.clickable').on('click',function(){
-          var parent = $(this).parent().parent()
-          if (parent.hasClass('panel-green')) {
-            parent.removeClass('panel-green', 300).addClass('panel-red', 300)
-          } else {
-            parent.removeClass('panel-red', 300).addClass('panel-green', 300)
-          }
-          // var effect = $(this).data('effect');
-          //    $(this).closest('.panel')[effect]();
-        })
-      })
-
     // Data selection code
     var selected = []
 
@@ -93,10 +79,10 @@ function getSetupFunction(data) {
         var domPlotId = 'plot-breakdown-' + dataId
         var domBlockId = 'block-' + dataId
         $("#plot-breakdown").append('\
-          <div class="col-md-6" id="' + domBlockId + '">\
+          <div class="col-md-6 breakdown" id="' + domBlockId + '">\
             <div class="panel panel-green">\
               <div class="panel-heading">\
-                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i>Using Fade Out</h3>\
+                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i>Healthy</h3>\
                 <!-- Watch Out: Here We must use the effect name in the data tag-->\
                 <span class="pull-right clickable" data-effect="fadeOut"><i class="fa fa-thumb-tack"></i></span>\
               </div>\
@@ -126,6 +112,16 @@ function getSetupFunction(data) {
         });
         $("#" + domPlotId).append(newChart.element)
       }
+
+      // Plug in used for switching subplot color
+      $('.clickable').on('click',function(){
+        var parent = $(this).parent().parent()
+        if (parent.hasClass('panel-green')) {
+          parent.removeClass('panel-green').addClass('panel-red')
+        } else {
+          parent.removeClass('panel-red').addClass('panel-green')
+        }
+      })
 
       $( "div.selected" ).hide();
       $( "div.selected" ).fadeIn();

@@ -12,7 +12,7 @@ class TimeSeriesAdmin extends Component {
           <div className="col-lg-12">
             <div className="panel panel-primary">
               <div className="panel-heading">
-                <h3 className="panel-title"><i className="fa fa-bar-chart-o"></i> Line Graph Example with Tooltips</h3>
+                <h3 className="panel-title"><i className="fa fa-bar-chart-o"></i> Aggregated Plot </h3>
               </div>
               <div className="panel-body">
                   <div className="flot-chart">
@@ -29,31 +29,29 @@ class TimeSeriesAdmin extends Component {
           </div>
         </div>
         <br/>
-        <div className="selected row" id="plot-breakdown">
-          <div className="col-md-6 col-md-offset-3">
-            <div style={{"position": "absolute", "top": "0", "right": "0", "textAlign":"right"}}>
-              <button type="button" className="btn btn-default btn-circle">
-                <i className="fa fa-times"></i>
-              </button>
+        <div className="row" id="plot-breakdown">
+          <div className="col-md-6" id="">
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                <h3 className="panel-title"><i className="fa fa-long-arrow-right"></i>Healthy</h3>
+                <span className="pull-right clickable" data-effect="fadeOut"><i className="fa fa-thumb-tack"></i></span>
+              </div>
+              <div className="panel-body">
+                <div className="plot" id="' + domPlotId + '"></div>
+              </div>
             </div>
-            <div className="plot" id="plot2"></div>
-          </div>
-          <div className="col-md-6 col-md-offset-3">
-            <div style={{"position": "absolute", "top": 0, "right": 0, "textAlign":"right"}}>
-              <button type="button" className="btn btn-default btn-circle">
-                <i className="fa fa-times"></i>
-              </button>
-            </div>
-            <div className="plot" id="plot3"></div>
           </div>
 
-          <div className="col-md-6 col-md-offset-3">
+          <div className="selected col-md-6">
             <div className="form-group">
               <label>Comment on performance</label>
-              <textarea className="form-control" rows="3"></textarea>
-              <button type="submit" className="btn btn-default">Submit Button</button>
+              <textarea className="form-control" rows="3" placeholder="What's the performance issue with the selected period..."></textarea>
             </div>
+            <button type="submit" className="btn btn-default">Submit Button</button>
+            <button type="reset" className="btn btn-default">Reset Button</button>
           </div>
+
+          <br/>
         </div>
       </div>
     )

@@ -71,7 +71,7 @@ function getSetupFunction(data) {
         var domPlotId = 'plot-breakdown-' + dataId
         var domBlockId = 'block-' + dataId
         $("#plot-breakdown").append('\
-          <div class="col-md-6 col-md-offset-3 id="' + domBlockId + '">\
+          <div class="col-md-6 col-md-offset-3" id="' + domBlockId + '">\
             <div style="position:absolute; top:0; right:0; textAlign:right;"}}>\
               <button type="button" class="btn btn-default btn-circle">\
                 <i class="fa fa-times"></i>\
@@ -94,7 +94,6 @@ function getSetupFunction(data) {
         });
         $("#" + domPlotId).append(newChart.element)
       }
-      console.log(confirmedSelection)
 
       $( "div.selected" ).hide();
       $( "div.selected" ).fadeIn();
@@ -118,10 +117,11 @@ function getSetupFunction(data) {
           var domBlockId = 'block-' + dataId
           $('#' + domPlotId).children().remove()
           $('#' + domBlockId).remove()
+          console.log(domBlockId)
         }
         plotAllData.unselect()
+        confirmedSelection = []
       });
-      confirmedSelection = []
     }
 
     $("#confirm-select").click(confirmSelect)

@@ -18,6 +18,7 @@ import {
   SummaryAdmin,
   SummaryAdminOverview,
   SummaryAdminDetailed,
+  TimeSeriesAdmin,
   StatsUser,
   TimeUser,
   TPS,
@@ -78,6 +79,7 @@ export default (store) => {
               <Route path="overview" component={SummaryAdminOverview}/>
               <Route path="detailed" component={SummaryAdminDetailed}/>
             </Route>
+            <Route path="time" component={TimeSeriesAdmin}/>
           </Route>
           <Route path="about" component={About}/>
           { /* Catch all route */ }

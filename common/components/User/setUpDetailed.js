@@ -1,3 +1,5 @@
+// JSON formatted data
+
 var data = {
     //  max CPU load: 0.87
     cpu_util: {

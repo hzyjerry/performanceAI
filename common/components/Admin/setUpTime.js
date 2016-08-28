@@ -6,6 +6,18 @@ var data = {
 }
 
 function getSetupFunction(data) {
+
+  // Transform the selected data type to target plain array type
+  function getPlainArray(selectedArray) {
+    if (!selectedArray || selectedArray.length === 0)
+      return []
+    var plain = [selectedArray[0].id]
+    for (var i = 0; i < selectedArray.length; i++) {
+      plain.push(selectedArray[i].value)
+    }
+    return plain
+  }
+
   return function() {
     // Plug in used for slow scrolling
     (function($) {
@@ -33,8 +45,8 @@ function getSetupFunction(data) {
       }
     }
 
-    var chart1 = c3.generate({
-        bindto: "#plot",
+    var plotAllData = c3.generate({
+        bindto: "#plot-all-data",
         data: {
             columns: data.time_series_columns,
             type: 'spline',
@@ -46,33 +58,46 @@ function getSetupFunction(data) {
         }
     });
 
+    var confirmedSelection = []
+
     function confirmSelect() {
-      var chart2 = c3.generate({
-          data: {
-              columns: [
-                  ['CPU Usage',7.37,81.61,55.04,57.72,50,67.31,49.3,59.02,67.31,58.87,53.91,62.39,58.07,56.56,58.53,54.01,41.59,6.93,4,4,2.04,2.86,2.91,35.13,57.9,59.02,59.17,57.6,89.61,58.54,42.59,58.2,64.28,80,58.72,42.85,58.68,58.4,68.62,66.98,58.4,65.74,51.45,56.91,56.8,46.53,9.8,12.],
-              ],
-              type: 'spline'
-          }
-      });
+      if (confirmedSelection.length > 0 || plotAllData.selected().length === 0)
+        return
 
+      var allData = plotAllData.data()
+      for (var i = 0; i < allData.length; i++){
+        var dataId = allData[i].id.split(' ').join('-')
+        var dataSelected = plotAllData.selected(dataId)
+        var domPlotId = 'plot-breakdown-' + dataId
+        var domBlockId = 'block-' + dataId
+        $("#plot-breakdown").append('\
+          <div class="col-md-6 col-md-offset-3 id="' + domBlockId + '">\
+            <div style="position:absolute; top:0; right:0; textAlign:right;"}}>\
+              <button type="button" class="btn btn-default btn-circle">\
+                <i class="fa fa-times"></i>\
+              </button>\
+            </div>\
+            <div class="plot" id="' + domPlotId + '"></div>\
+          </div>\
+          ')
+        confirmedSelection.push(dataId)
 
+        var newData = allData[i]
 
-      var chart3 = c3.generate({
-          data: {
-              columns: [
-                  ['Memory Usage',63.08,63.08,63.08,63.08,63.09,63.10,63.10,63.10,63.12,63.12,63.12,63.12,63.15,63.17,63.17,63.17,63.17,63.17,63.19,63.19,63.19,63.22,63.22,63.22,63.22,63.26,63.26,63.26,63.26,63.27,63.27,63.27,63.27,63.29,63.29,63.29,63.29,63.29,63.31,63.32,63.32,63.32,63.33],
-              ],
-              type: 'spline'
-          }
-      });
+        var newChart = c3.generate({
+            data: {
+                columns: [
+                    getPlainArray(plotAllData.selected(allData[i].id))
+                ],
+                type: 'spline'
+            }
+        });
+        $("#" + domPlotId).append(newChart.element)
+      }
+      console.log(confirmedSelection)
 
       $( "div.selected" ).hide();
-      $("#plot2").append(chart2.element);
-      $("#plot3").append(chart3.element);
       $( "div.selected" ).fadeIn();
-
-      console.log($('#plot2').children())
 
       // displayPlot()
       setTimeout(function() {
@@ -87,12 +112,16 @@ function getSetupFunction(data) {
 
     function undoSelect() {
       $( "div.selected" ).fadeOut(function done() {
-        $('#plot2').children().remove()
-        $('#plot3').children().remove()
-        chart1.unselect(chart1.data().forEach(function(elem) {
-          return elem.id
-        }) )
+        for (var i = 0; i < confirmedSelection.length; i++) {
+          var dataId = confirmedSelection[i]
+          var domPlotId = 'plot-breakdown-' + dataId
+          var domBlockId = 'block-' + dataId
+          $('#' + domPlotId).children().remove()
+          $('#' + domBlockId).remove()
+        }
+        plotAllData.unselect()
       });
+      confirmedSelection = []
     }
 
     $("#confirm-select").click(confirmSelect)

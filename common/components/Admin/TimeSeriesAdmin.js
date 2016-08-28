@@ -8,7 +8,7 @@ class TimeSeriesAdmin extends Component {
       <div>
         <div className="row">
           <div className="col-md-8 col-md-offset-2">
-            <div className="plot" id="plot" style={{"height": "600px"}}></div>
+            <div className="plot" id="plot-all-data" style={{"height": "600px"}}></div>
           </div>
         </div>
         <br/>
@@ -18,7 +18,7 @@ class TimeSeriesAdmin extends Component {
             <button type="button" className="btn btn-lg btn-warning" id="unselect" onclick="undoSelect()">Unselect</button>
           </div>
         </div>
-        <div className="selected row">
+        <div className="selected row" id="plot-breakdown">
           <div className="col-md-6 col-md-offset-3">
             <div style={{"position": "absolute", "top": "0", "right": "0", "textAlign":"right"}}>
               <button type="button" className="btn btn-default btn-circle">

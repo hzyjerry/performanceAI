@@ -18,7 +18,7 @@ var data = [
 
 function getSetupFunction(data) {
 
-  // Format input data. Separation of percentage axis and raw number axis
+  /* Format input data. Separation of percentage axis and raw number axis */
   var formattedData = {}
   var needSecondAxis
   (function formatInputData(data) {
@@ -41,7 +41,7 @@ function getSetupFunction(data) {
 
   console.log(formattedData)
 
-  // Transform the selected data type to target plain array type
+  /* Transform the selected data type to target plain array type */
   function getPlainArray(selectedArray) {
     if (!selectedArray || selectedArray.length === 0)
       return []
@@ -52,6 +52,7 @@ function getSetupFunction(data) {
     return plain
   }
 
+  /* Set up function called when components finish loading. */
   return function() {
     // Plug in used for slow scrolling
     (function($) {
@@ -106,10 +107,10 @@ function getSetupFunction(data) {
 
     var confirmedSelection = []
 
+    /* Actioin triggered by confirm button */
     function confirmSelect() {
       if (confirmedSelection.length > 0 || plotAllData.selected().length === 0)
         return
-
       var allData = plotAllData.data()
       for (var i = 0; i < allData.length; i++){
         var dataId = allData[i].id.split(' ').join('-')
@@ -132,7 +133,6 @@ function getSetupFunction(data) {
         confirmedSelection.push(dataId)
 
         var newData = allData[i]
-
         var newChart = c3.generate({
             data: {
                 columns: [
@@ -174,6 +174,7 @@ function getSetupFunction(data) {
       }, 500)
     }
 
+    /* Action triggered by Unselect button */
     function undoSelect() {
       $( "div.selected" ).fadeOut(function done() {
         for (var i = 0; i < confirmedSelection.length; i++) {
@@ -198,6 +199,41 @@ function getSetupFunction(data) {
     }
 
     $( "div.selected" ).hide();
+
+    /* Action triggered by submission. Outputs target data format and user input 
+      Sample Data Format:
+        {
+          author: "system",
+          summary: "the sudden 80% spike in CPU usage is abmornal. Possibly due to memory usage ",
+          selectedData: [
+            {
+              id: "CPU Usage",
+              healthy: false,
+              start: 
+              end:
+            }
+          ]
+        }
+    */
+    function submitSelect() {
+      var submitRecord = {
+        author: "system",
+        summary: "the sudden 80% spike in CPU usage is abmornal. Possibly due to memory usage",
+        selectedData: []
+      }
+      var shownData = plotAllData.data.shown()
+      for (var i = 0; i < shownData.length; i++) {
+        var id = shownData[i].id
+        var selected = plotAllData.selected(id)
+        submitRecord.selectedData.push({
+          id: id,
+          healthy: false,
+          start: selected[0].x,
+          end: selected[selected.length - 1].x
+        })
+      }
+      console.log(submitRecord)
+    }
   }
 }
 

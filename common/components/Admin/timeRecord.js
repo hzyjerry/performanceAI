@@ -6,12 +6,18 @@ var timeRecord = [
 			{
 				id: "CPU Usage",
 				healthy: false,
-				data: []
+				start: 
+				end:
 			},
 			{
 				id: "Memory Usage",
 				healthy: false,
-				data: []
+				start:
+			},
+			{
+				id: "Disk PG Steal",
+				healthy: true,
+				end:
 			}
 		]
 	},

@@ -39,27 +39,27 @@ class TimeSeriesAdmin extends Component {
                 <div className="list-group">
                     <a href="#" className="list-group-item">
                         <span className="badge">System</span>
-                        <i className="fa fa-fw fa-calendar"></i> Calendar updated
+                        <i className="fa fa-fw fa-calendar"></i> CPU Abnormal Dip
                     </a>
                     <a href="#" className="list-group-item">
                         <span className="badge">System</span>
-                        <i className="fa fa-fw fa-calendar"></i> Calendar updated
+                        <i className="fa fa-fw fa-calendar"></i> CPU Abnormal Spike
                     </a>
                     <a href="#" className="list-group-item">
                         <span className="badge">Wai Ip</span>
-                        <i className="fa fa-fw fa-money"></i> Invoice 653 has been paid
+                        <i className="fa fa-fw fa-money"></i> Potential Memory Leak
                     </a>
                     <a href="#" className="list-group-item">
                         <span className="badge">Wai Ip</span>
-                        <i className="fa fa-fw fa-user"></i> A new user has been added
+                        <i className="fa fa-fw fa-user"></i> Paging Issue
                     </a>
                     <a href="#" className="list-group-item">
                         <span className="badge">Naseem</span>
-                        <i className="fa fa-fw fa-truck"></i> Order 392 shipped
+                        <i className="fa fa-fw fa-truck"></i> Memory Issue
                     </a>
                     <a href="#" className="list-group-item">
                         <span className="badge">Lucianno</span>
-                        <i className="fa fa-fw fa-comment"></i> Commented on a post
+                        <i className="fa fa-fw fa-comment"></i> GC Issue
                     </a>
                 </div>
               </div>

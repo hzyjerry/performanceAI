@@ -33,7 +33,7 @@ class TimeSeriesAdmin extends Component {
           <div className="col-md-6" id="">
             <div className="panel panel-default">
               <div className="panel-heading">
-                <h3 className="panel-title"><i className="fa fa-long-arrow-right"></i>Healthy</h3>
+                <h3 className="panel-title"><i className="fa fa-bars"></i> List of Problems</h3>
               </div>
               <div className="panel-body">
                 <div className="list-group">

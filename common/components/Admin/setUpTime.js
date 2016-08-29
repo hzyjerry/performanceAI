@@ -82,7 +82,7 @@ function getSetupFunction(data) {
           <div class="col-md-6 breakdown" id="' + domBlockId + '">\
             <div class="panel panel-green">\
               <div class="panel-heading">\
-                <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i>Healthy</h3>\
+                <h3 class="panel-title"><i class="fa fa-check-circle"></i> Healthy</h3>\
                 <!-- Watch Out: Here We must use the effect name in the data tag-->\
                 <span class="pull-right clickable" data-effect="fadeOut"><i class="fa fa-thumb-tack"></i></span>\
               </div>\
@@ -115,11 +115,15 @@ function getSetupFunction(data) {
 
       // Plug in used for switching subplot color
       $('.clickable').on('click',function(){
-        var parent = $(this).parent().parent()
+        var parent = $(this).closest(".panel")
+        var title = $(this).siblings(".panel-title")
+        var icon = parent.find('.panel-title > .fa')
         if (parent.hasClass('panel-green')) {
           parent.removeClass('panel-green').addClass('panel-red')
+          title.html('<i class="fa fa-exclamation-triangle"></i> Unhealthy')
         } else {
           parent.removeClass('panel-red').addClass('panel-green')
+          title.html('<i class="fa fa-check-circle"></i> Healthy')
         }
       })
 

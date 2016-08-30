@@ -2,8 +2,12 @@ import React, {PropTypes, Component} from 'react'
 import { connect } from 'react-redux'
 import TimeSeriesSubplot from './TimeSeriesSubplot'
 import { timeSeriesDataAll } from '../../data.js'
+import Scroll from 'react-scroll'
 
 import './time.css'
+
+var Element = Scroll.Element;
+var scroller = Scroll.scroller;
 
 class TimeSeriesAdmin extends Component {
   constructor(props) {
@@ -36,6 +40,11 @@ class TimeSeriesAdmin extends Component {
       subData.push(this.getPlainArray(plotAllData.selected(allData[i].id)))
     }
     this.setState({subData: subData, confirmedSelection: confirmedSelection})
+    scroller.scrollTo('time-series-subplot', {
+      duration: 500,
+      delay: 100,
+      smooth: true,
+    })
   }
 
   handleUndoSelect() {

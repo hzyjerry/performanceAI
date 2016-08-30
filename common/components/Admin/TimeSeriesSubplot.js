@@ -1,6 +1,10 @@
 import React, {PropTypes, Component} from 'react'
 import { connect } from 'react-redux'
 import setUpTime from './setUpTime'
+import Scroll from 'react-scroll'
+
+var Element = Scroll.Element;
+var scroller = Scroll.scroller;
 
 class TimeSeriesSubplot extends Component {
   constructor(props) {
@@ -12,39 +16,7 @@ class TimeSeriesSubplot extends Component {
 
   render() {
     /*
-      $("#plot-breakdown").append('\
-        <div class="col-md-6 breakdown" id="' + domBlockId + '">\
-          <div class="panel panel-green">\
-            <div class="panel-heading">\
-              <h3 class="panel-title"><i class="fa fa-check-circle"></i> Healthy</h3>\
-              <!-- Watch Out: Here We must use the effect name in the data tag-->\
-              <span class="pull-right clickable" data-effect="fadeOut"><i class="fa fa-thumb-tack"></i></span>\
-            </div>\
-          <div class="panel-body">\
-            <div class="plot" id="' + domPlotId + '"></div>\
-          </div>\
-        </div>\
-        ')
-                $("#" + domPlotId).append(newChart.element)
-
-      var newData = allData[i]
-      var newChart = c3.generate({
-          data: {
-              columns: [
-                  getPlainArray(plotAllData.selected(allData[i].id))
-              ],
-              type: 'spline'
-          },
-          axis: {
-            y: {
-              tick: {
-                format: d3.format('.4')
-              }
-            }
-          }
-      });
-
-          // Plug in used for switching subplot color
+    // Plug in used for switching subplot color
     $('.clickable').on('click',function(){
       var parent = $(this).closest(".panel")
       var title = $(this).siblings(".panel-title")
@@ -69,13 +41,15 @@ class TimeSeriesSubplot extends Component {
     var subData = this.props.subData
     return (
       <div className="row" id="plot-breakdown">
-        {this.state.subData.map(function (data) {
-          var dataId = data[0].split(' ').join('-')
-          var domPlotId = 'plot-breakdown-' + dataId
-          return (
-            <TimeSeriesSubplotSnippet data={data} domId={domPlotId} key={dataId}/>
-          )
-        })}
+        <Element name="time-series-subplot">
+          {this.state.subData.map(function (data) {
+            var dataId = data[0].split(' ').join('-')
+            var domPlotId = 'plot-breakdown-' + dataId
+            return (
+              <TimeSeriesSubplotSnippet data={data} domId={domPlotId} key={dataId}/>
+            )
+          })}
+        </Element>
       </div>
     )
   }
@@ -84,14 +58,7 @@ class TimeSeriesSubplot extends Component {
     this.setState({subData: nextProps.subData})
   }
 
-  componentDidUpdate() {
-    // var newData = allData[i]
-    // console.log(this.state.subData)
-    
-    /* this.state.subData.forEach(function (data) {
-      var dataId = data[0].split(' ').join('-')
-      
-    })*/
+  componentDidMount() {
   }
 }
 

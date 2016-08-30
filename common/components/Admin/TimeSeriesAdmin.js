@@ -143,9 +143,8 @@ class TimeSeriesAdmin extends Component {
               </div>
               <div className="panel-body">
                   <div className="flot-chart">
-                    <Element name="time-series-all">
-                      <div className="flot-chart-content" id="plot-all-data"></div>
-                    </Element>
+                    <Element name="time-series-all"></Element>
+                    <div className="flot-chart-content" id="plot-all-data"></div>
                   </div>
                   <div className="text-center">
                     <div className="btn-toolbar">

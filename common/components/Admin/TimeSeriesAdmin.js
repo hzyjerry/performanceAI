@@ -17,12 +17,15 @@ class TimeSeriesAdmin extends Component {
     this.getPlainArray = this.getPlainArray.bind(this)
     this.handleSelectRecord = this.handleSelectRecord.bind(this)
     this.populateData = this.populateData.bind(this)
+    this.submitSelect = this.submitSelect.bind(this)
+    this.handleSummaryChange = this.handleSummaryChange.bind(this)
 
     this.state = {
       plotAllData: null, 
       subData: [],                  /* Made of plain arrays */
       confirmedSelection: [],
-      records: timeRecord
+      records: timeRecord,
+      summary: "What's the performance issue with the selected period..."
     }
   }
 
@@ -86,23 +89,35 @@ class TimeSeriesAdmin extends Component {
   }
 
   submitSelect() {
-    var submitRecord = {
-      author: "system",
-      summary: "the sudden 80% spike in CPU usage is abmornal. Possibly due to memory usage",
-      selectedData: []
+    var plotAllData = this.state.plotAllData
+    var selectedData = plotAllData.selected()
+    timeRecord[Object.keys(timeRecord).length] = {
+      author: "Wai Ip",
+      summary: this.state.summary,
+      start: selectedData[0].x,
+      end: selectedData[selectedData.length - 1].x,
+      dataHealth: {
+        "CPU Usage": false,
+        "Memory Usage": true,
+        "Disk PG Steal": true,
+      }
     }
-    var shownData = plotAllData.data.shown()
-    for (var i = 0; i < shownData.length; i++) {
-      var id = shownData[i].id
-      var selected = plotAllData.selected(id)
-      submitRecord.selectedData.push({
-        id: id,
-        healthy: false,
-        start: selected[0].x,
-        end: selected[selected.length - 1].x
-      })
-    }
-    console.log(submitRecord)
+    this.setState({records: timeRecord})
+
+    var timeInterval = 500
+    scroller.scrollTo('time-series-all', {
+      duration: timeInterval,
+      delay: 100,
+      smooth: true,
+    })
+    var self = this
+    setTimeout(function() {
+      self.handleUndoSelect()
+    }, timeInterval)
+  }
+
+  handleSummaryChange(event) {
+    this.setState({summary: event.target.value});
   }
 
   render() {
@@ -117,7 +132,9 @@ class TimeSeriesAdmin extends Component {
               </div>
               <div className="panel-body">
                   <div className="flot-chart">
+                    <Element name="time-series-all">
                       <div className="flot-chart-content" id="plot-all-data"></div>
+                    </Element>
                   </div>
                   <div className="text-center">
                     <div className="btn-toolbar">
@@ -152,9 +169,9 @@ class TimeSeriesAdmin extends Component {
           <div className="selected col-md-6">
             <div className="form-group">
               <label>Comment on performance</label>
-              <textarea className="form-control" rows="3" placeholder="What's the performance issue with the selected period..."></textarea>
+              <textarea className="form-control" rows="3" value={this.state.summary} onChange={self.handleSummaryChange}></textarea>
             </div>
-            <button type="submit" className="btn btn-default">Submit Button</button>
+            <button type="submit" className="btn btn-default" onClick={this.submitSelect}>Submit Button</button>
             <button type="reset" className="btn btn-default">Reset Button</button>
           </div>
         </div>

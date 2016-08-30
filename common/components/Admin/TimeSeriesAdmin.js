@@ -1,7 +1,7 @@
 import React, {PropTypes, Component} from 'react'
 import { connect } from 'react-redux'
 import TimeSeriesSubplot from './TimeSeriesSubplot'
-import { timeSeriesDataAll } from '../../data.js'
+import { timeSeriesDataAll, timeRecord } from '../../data.js'
 import Scroll from 'react-scroll'
 
 import './time.css'
@@ -19,7 +19,8 @@ class TimeSeriesAdmin extends Component {
     this.state = {
       plotAllData: null, 
       subData: [],                  /* Made of plain arrays */
-      confirmedSelection: []
+      confirmedSelection: [],
+      records: timeRecord
     }
   }
 
@@ -65,6 +66,7 @@ class TimeSeriesAdmin extends Component {
   }
 
   render() {
+    var self = this
     return (
       <div>
         <div className="row">
@@ -96,30 +98,12 @@ class TimeSeriesAdmin extends Component {
               </div>
               <div className="panel-body">
                 <div className="list-group">
-                    <a href="#" className="list-group-item">
-                        <span className="badge">System</span>
-                        <i className="fa fa-fw fa-calendar"></i> CPU Abnormal Dip
-                    </a>
-                    <a href="#" className="list-group-item">
-                        <span className="badge">System</span>
-                        <i className="fa fa-fw fa-calendar"></i> CPU Abnormal Spike
-                    </a>
-                    <a href="#" className="list-group-item">
-                        <span className="badge">Wai Ip</span>
-                        <i className="fa fa-fw fa-comment"></i> Potential Memory Leak
-                    </a>
-                    <a href="#" className="list-group-item">
-                        <span className="badge">Wai Ip</span>
-                        <i className="fa fa-fw fa-user"></i> Paging Issue
-                    </a>
-                    <a href="#" className="list-group-item">
-                        <span className="badge">Naseem</span>
-                        <i className="fa fa-fw fa-truck"></i> Memory Issue
-                    </a>
-                    <a href="#" className="list-group-item">
-                        <span className="badge">Lucianno</span>
-                        <i className="fa fa-fw fa-comment"></i> GC Issue
-                    </a>
+                    {
+                      Object.keys(self.state.records).map(function(key, index) {
+                        var record = self.state.records[key]
+                        return (<TimeSeriesRecord key={index} id={index} title={"CPU Abnormal Dip"} author={"System"}/>)
+                      })
+                    }
                 </div>
               </div>
             </div>
@@ -201,5 +185,30 @@ const mapDispatchToProps = (dispatch) => {
     }
   }
 }
+
+
+class TimeSeriesRecord extends Component {
+  constructor(props) {
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  render() {
+    return (
+      <a className="list-group-item">
+        <span className="badge"> {this.props.author} </span>
+        <i className="fa fa-fw fa-comment"></i> {this.props.title}
+      </a>
+    )
+  }
+
+  handleClick() {
+    console.log("Output data in id " + this.props.id)
+  }
+
+  componentDidMount() {
+  }
+}
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(TimeSeriesAdmin)

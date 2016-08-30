@@ -5,6 +5,8 @@ export const UPLOAD = 'UPLOAD'
 export const ANALYZE_REQUEST = 'ANALYZE_REQUEST'
 export const ANALYZE_FAILURE = 'ANALYZE_FAILURE'
 export const ANALYZE_SUCCESS = 'ANALYZE_SUCCESS'
+export const ADMIN_LOGIN = 'ADMIN_LOGIN'
+export const USER_LOGIN = 'USER_LOGIN'
 
 var request = require('superagent');
 import { browserHistory } from 'react-router'

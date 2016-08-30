@@ -13,3 +13,4 @@
 
 export uploadedFile from './uploadedFile'
 export analyzedResult from './analyzedResult'
+export admin from './admin'

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import TimeSeriesSubplot from './TimeSeriesSubplot'
 import { timeSeriesDataAll, timeRecord } from '../../data.js'
 import Scroll from 'react-scroll'
+import { ADMIN_LOGIN, USER_LOGIN } from '../../actions'
 
 import './time.css'
 
@@ -132,6 +133,7 @@ class TimeSeriesAdmin extends Component {
   }
 
   render() {
+    this.props.login()
     var self = this
     return (
       <div>
@@ -177,12 +179,17 @@ class TimeSeriesAdmin extends Component {
           </div>
 
           <div className="selected col-md-6">
-            <div className="form-group">
-              <label>Comment on performance</label>
-              <textarea className="form-control" rows="3" placeholder="What's the performance issue with the selected period..." value={this.state.summary} onChange={self.handleSummaryChange}></textarea>
-            </div>
-            <button type="submit" className="btn btn-default" onClick={this.submitSelect}>Submit Button</button>
-            <button type="reset" className="btn btn-default">Reset Button</button>
+            { self.props.admin? (
+              <div>
+                <div className="form-group">
+                  <label>Comment on performance</label>
+                  <textarea className="form-control" rows="3" placeholder="What's the performance issue with the selected period..." value={self.state.summary} onChange={self.handleSummaryChange}></textarea>
+                </div>
+                <button type="submit" className="btn btn-default" onClick={self.submitSelect}>Submit Button</button>
+                <button type="reset" className="btn btn-default">Reset Button</button>
+              </div>
+              ): null
+            }
           </div>
         </div>
 
@@ -220,9 +227,9 @@ class TimeSeriesAdmin extends Component {
             columns: formattedData.time_series_columns,
             type: 'spline',
             selection: {
-                enabled: true,
-                draggable: true,
-                grouped: true
+                enabled: this.props.admin,
+                draggable: this.props.admin,
+                grouped: this.props.admin
             },
             axes: formattedData.axes
         },
@@ -243,12 +250,16 @@ class TimeSeriesAdmin extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    admin: state.admin
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onClick: (props) => {
+    login: () => {
+      dispatch({
+        type: ADMIN_LOGIN
+      })
     }
   }
 }

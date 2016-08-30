@@ -98,7 +98,8 @@ function handleRender(req, res) {
         didInvalidate: false,
         results: {},
         error: {}
-      }
+      },
+      admin: true
     }
     const memoryHistory = createMemoryHistory(req.url)
     const store = configureStore(memoryHistory, preloadedState)

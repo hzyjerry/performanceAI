@@ -15,7 +15,8 @@ class TimeSeriesSubplot extends Component {
   }
 
   render() {
-    var subData = this.props.subData
+    var subData = this.state.subData
+    console.log(subData)
     return (
       <div className="row" id="plot-breakdown">
         <Element name="time-series-subplot">
@@ -43,11 +44,20 @@ class TimeSeriesSubplotSnippet extends Component {
   constructor(props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
-    this.state = {
-      healthy: true,
-      icon: "fa fa-check-circle",
-      panel: "panel panel-green",
-      title: " Healthy"
+    if (props.healthy || props.healthy === undefined) {
+      this.state = {
+        healthy: true,
+        icon: "fa fa-check-circle",
+        panel: "panel panel-green",
+        title: " Healthy"
+      }
+    } else {
+      this.state = {
+        healthy: false,
+        icon: "fa fa-exclamation-triangle",
+        panel: "panel panel-red",
+        title: " Unhealthy"
+      }
     }
   }
 
@@ -106,6 +116,28 @@ class TimeSeriesSubplotSnippet extends Component {
           }
         }
     });
+    $("#" + domPlotId).append(newChart.element)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    var domPlotId = nextProps.domId
+    var data = nextProps.data
+    var newChart = c3.generate({
+        data: {
+            columns: [
+                data
+            ],
+            type: 'spline'
+        },
+        axis: {
+          y: {
+            tick: {
+              format: d3.format('.4')
+            }
+          }
+        }
+    });
+    $("#" + domPlotId).children().remove()
     $("#" + domPlotId).append(newChart.element)
   }
 }

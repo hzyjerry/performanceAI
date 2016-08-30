@@ -15,6 +15,8 @@ class TimeSeriesAdmin extends Component {
     this.handleConfirm = this.handleConfirm.bind(this)
     this.handleUndoSelect = this.handleUndoSelect.bind(this)
     this.getPlainArray = this.getPlainArray.bind(this)
+    this.handleSelectRecord = this.handleSelectRecord.bind(this)
+    this.populateData = this.populateData.bind(this)
 
     this.state = {
       plotAllData: null, 
@@ -29,17 +31,28 @@ class TimeSeriesAdmin extends Component {
     var confirmedSelection = this.state.confirmedSelection
     if (confirmedSelection.length > 0 || plotAllData.selected().length === 0)
       return
-    var allData = plotAllData.data()
+    this.populateData()
+  }
+
+  handleUndoSelect() {
+    var plotAllData = this.state.plotAllData
+    plotAllData.unselect()
+    this.setState({subData: [], confirmedSelection: []})
+  }
+
+  populateData() {
+    var data = this.state.plotAllData.data()
     var subData = []
-    for (var i = 0; i < allData.length; i++){
-      var dataId = allData[i].id.split(' ').join('-')
+    var confirmedSelection = []
+    var plotAllData = this.state.plotAllData
+    console.log(plotAllData.selected())
+    for (var i = 0; i < data.length; i++){
+      var dataId = data[i].id.split(' ').join('-')
       var dataSelected = plotAllData.selected(dataId)
       confirmedSelection.push(dataId)
-
-      // var domPlotId = 'plot-breakdown-' + dataId
-      // var domBlockId = 'block-' + dataId
-      subData.push(this.getPlainArray(plotAllData.selected(allData[i].id)))
+      subData.push(this.getPlainArray(plotAllData.selected(data[i].id)))
     }
+    // console.log(subData, confirmedSelection)
     this.setState({subData: subData, confirmedSelection: confirmedSelection})
     scroller.scrollTo('time-series-subplot', {
       duration: 500,
@@ -48,10 +61,14 @@ class TimeSeriesAdmin extends Component {
     })
   }
 
-  handleUndoSelect() {
-    var plotAllData = this.state.plotAllData
-    plotAllData.unselect()
-    this.setState({subData: [], confirmedSelection: []})
+  handleSelectRecord(record) {
+    var self = this
+    return function() {
+      var plotAllData = self.state.plotAllData
+      plotAllData.unselect()
+      plotAllData.select([], Array.apply(null, Array(record.end - record.start)).map(function (_, i) {return i + record.start;}))
+      self.populateData()
+    }
   }
 
   /* Transform the selected data type to target plain array type */
@@ -63,6 +80,26 @@ class TimeSeriesAdmin extends Component {
       plain.push(selectedArray[i].value)
     }
     return plain
+  }
+
+  submitSelect() {
+    var submitRecord = {
+      author: "system",
+      summary: "the sudden 80% spike in CPU usage is abmornal. Possibly due to memory usage",
+      selectedData: []
+    }
+    var shownData = plotAllData.data.shown()
+    for (var i = 0; i < shownData.length; i++) {
+      var id = shownData[i].id
+      var selected = plotAllData.selected(id)
+      submitRecord.selectedData.push({
+        id: id,
+        healthy: false,
+        start: selected[0].x,
+        end: selected[selected.length - 1].x
+      })
+    }
+    console.log(submitRecord)
   }
 
   render() {
@@ -101,7 +138,7 @@ class TimeSeriesAdmin extends Component {
                     {
                       Object.keys(self.state.records).map(function(key, index) {
                         var record = self.state.records[key]
-                        return (<TimeSeriesRecord key={index} id={index} title={"CPU Abnormal Dip"} author={"System"}/>)
+                        return (<TimeSeriesRecord key={index} id={index} summary={record.summary} author={record.author} onClick={self.handleSelectRecord(record)}/>)
                       })
                     }
                 </div>
@@ -190,23 +227,16 @@ const mapDispatchToProps = (dispatch) => {
 class TimeSeriesRecord extends Component {
   constructor(props) {
     super(props)
-    this.handleClick = this.handleClick.bind(this)
   }
 
   render() {
     return (
-      <a className="list-group-item">
+      <a className="list-group-item" onClick={this.props.onClick}>
         <span className="badge"> {this.props.author} </span>
-        <i className="fa fa-fw fa-comment"></i> {this.props.title}
+        <i className="fa fa-fw fa-comment"></i> 
+        {" " + (this.props.summary.length > 50? this.props.summary.substring(0, 50) + "...": this.props.summary)}
       </a>
     )
-  }
-
-  handleClick() {
-    console.log("Output data in id " + this.props.id)
-  }
-
-  componentDidMount() {
   }
 }
 

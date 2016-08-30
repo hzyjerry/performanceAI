@@ -39,7 +39,7 @@ var timeRecord = {
   },
   1: {
     author: "system",
-    summary: "the sudden 80% spike in CPU usage is abmornal. Possibly due to memory usage ",
+    summary: "The sudden 80% spike in CPU usage is abmornal. Possibly due to memory usage ",
     start: 5,
     end: 10,
     selectedData: [

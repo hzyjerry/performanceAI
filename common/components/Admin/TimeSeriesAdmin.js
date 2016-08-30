@@ -1,10 +1,46 @@
 import React, {PropTypes, Component} from 'react'
 import { connect } from 'react-redux'
-import setUpTime from './setUpTime'
+import TimeSeriesSubplot from './TimeSeriesSubplot'
+import { timeSeriesDataAll } from '../../data.js'
 
 import './time.css'
 
 class TimeSeriesAdmin extends Component {
+  constructor(props) {
+    super(props)
+    this.handleConfirm = this.handleConfirm.bind(this)
+    this.handleUndoSelect = this.handleUndoSelect.bind(this)
+
+    this.state = {
+      plotAllData: null, 
+      subData: [],                  /* Made of plain arrays */
+      confirmedSelection: []
+    }
+  }
+
+  handleConfirm() {
+    var plotAllData = this.state.plotAllData
+    var confirmedSelection = this.state.confirmedSelection
+    if (confirmedSelection.length > 0 || plotAllData.selected().length === 0)
+      return
+    var allData = plotAllData.data()
+    var subData = []
+    for (var i = 0; i < allData.length; i++){
+      var dataId = allData[i].id.split(' ').join('-')
+      var dataSelected = plotAllData.selected(dataId)
+      confirmedSelection.push(dataId)
+
+      // var domPlotId = 'plot-breakdown-' + dataId
+      // var domBlockId = 'block-' + dataId
+      subData.push(getPlainArray(plotAllData.selected(allData[i].id)))
+    }
+    this.setState({subData: subData, confirmedSelection: confirmedSelection})
+  }
+
+  handleUndoSelect() {
+    this.setState({subData: [], confirmedSelection: []})
+  }
+
   render() {
     return (
       <div>
@@ -20,8 +56,8 @@ class TimeSeriesAdmin extends Component {
                   </div>
                   <div className="text-center">
                     <div className="btn-toolbar">
-                      <button type="button" className="btn btn-lg btn-warning center-block" id="unselect" style={{'float': 'right'}}>Unselect</button>
-                      <button type="button" className="btn btn-lg btn-primary center-block" id="confirm-select" style={{'float': 'right'}}>Confirm</button>
+                      <button type="button" className="btn btn-lg btn-warning center-block" id="unselect" style={{'float': 'right'}} onClick={this.handleUndoSelect}>Unselect</button>
+                      <button type="button" className="btn btn-lg btn-primary center-block" id="confirm-select" style={{'float': 'right'}} onClick={this.handleConfirm}>Confirm</button>
                     </div>
                   </div>
               </div>
@@ -78,14 +114,56 @@ class TimeSeriesAdmin extends Component {
 
         <br/>
 
-        <div className="row" id="plot-breakdown">
-        </div>
+        <TimeSeriesSubplot subData={this.state.subData}/>
       </div>
     )
   }
 
   componentDidMount() {
-    setUpTime()
+    var formattedData = {}
+    var needSecondAxis
+    (function formatInputData(data) {
+      formattedData.time_series_columns = []
+      formattedData.axes = {}
+      needSecondAxis = false
+      for (var i = 0; i < data.length; i++) {
+        var entry = data[i]
+        if (entry.percentage) {
+          formattedData.axes[entry.name] = 'y'
+        } else {
+          formattedData.axes[entry.name] = 'y2'
+          needSecondAxis = true
+        }
+        var dataArray = entry.data
+        dataArray.unshift(entry.name)
+        formattedData.time_series_columns.push(dataArray)
+      }
+    })(timeSeriesDataAll)
+    
+    var plotAllData = c3.generate({
+        bindto: "#plot-all-data",
+        data: {
+            columns: formattedData.time_series_columns,
+            type: 'spline',
+            selection: {
+                enabled: true,
+                draggable: true,
+                grouped: true
+            },
+            axes: formattedData.axes
+        },
+        axis: {
+          y: {
+            tick: {
+              format: d3.format('.4')
+            }
+          },
+          y2: {
+            show: needSecondAxis
+          }
+        }
+    });
+    this.setState({plotAllData: plotAllData})
   }
 }
 

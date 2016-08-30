@@ -1,6 +1,7 @@
 import React from 'react';
 import {IndexRoute, Route, Redirect, IndexRedirect} from 'react-router';
 import UploadSucceed from '../components/UploadSucceed/UploadSucceed'
+import data from '../data.js'
 
 import {
   App,

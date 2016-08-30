@@ -9,6 +9,7 @@ import './time.css'
 
 var Element = Scroll.Element;
 var scroller = Scroll.scroller;
+var admin = false
 
 class TimeSeriesAdmin extends Component {
   constructor(props) {
@@ -28,8 +29,10 @@ class TimeSeriesAdmin extends Component {
       confirmedSelection: [],
       records: timeRecord,
       summary: "",
-      health: {}
+      health: {},
     }
+
+    admin = props.admin             /* Hack to enable componentDidMount access admin */
   }
 
   handleConfirm() {
@@ -227,9 +230,9 @@ class TimeSeriesAdmin extends Component {
             columns: formattedData.time_series_columns,
             type: 'spline',
             selection: {
-                enabled: this.props.admin,
-                draggable: this.props.admin,
-                grouped: this.props.admin
+                enabled: true,
+                draggable: true,
+                grouped: true
             },
             axes: formattedData.axes
         },

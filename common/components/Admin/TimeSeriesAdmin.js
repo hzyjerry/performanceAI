@@ -136,7 +136,10 @@ class TimeSeriesAdmin extends Component {
   }
 
   render() {
-    this.props.login()
+    console.log(this.props)
+    if (this.props.routes[2].path === "admin") {
+      this.props.login()
+    }
     var self = this
     return (
       <div>
@@ -154,7 +157,10 @@ class TimeSeriesAdmin extends Component {
                   <div className="text-center">
                     <div className="btn-toolbar">
                       <button type="button" className="btn btn-lg btn-warning center-block" id="unselect" style={{'float': 'right'}} onClick={this.handleUndoSelect}>Unselect</button>
-                      <button type="button" className="btn btn-lg btn-primary center-block" id="confirm-select" style={{'float': 'right'}} onClick={this.handleConfirm}>Confirm</button>
+                      { self.props.admin? (
+                        <button type="button" className="btn btn-lg btn-primary center-block" id="confirm-select" style={{'float': 'right'}} onClick={self.handleConfirm}>Confirm</button>
+                        ): null
+                      }
                     </div>
                   </div>
               </div>

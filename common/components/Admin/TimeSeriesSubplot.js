@@ -1,6 +1,5 @@
 import React, {PropTypes, Component} from 'react'
 import { connect } from 'react-redux'
-import setUpTime from './setUpTime'
 import Scroll from 'react-scroll'
 
 var Element = Scroll.Element;

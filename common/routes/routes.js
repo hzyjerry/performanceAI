@@ -64,7 +64,7 @@ export default (store) => {
               <Route path="detailed" component={SummaryUserDetailed}/>
             </Route>
             <Route path="stats" component={StatsUser}/>
-            <Route path="time" component={TimeUser}/>
+            <Route path="time" component={TimeSeriesAdmin}/>
           </Route>
           <Route path="about" component={About}/>
           { /* Catch all route */ }

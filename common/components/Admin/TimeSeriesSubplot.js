@@ -67,25 +67,13 @@ class TimeSeriesSubplot extends Component {
     }, 500)
     */
     var subData = this.props.subData
-    console.log("render")
-    console.log(this.state.subData)
     return (
       <div className="row" id="plot-breakdown">
         {this.state.subData.map(function (data) {
           var dataId = data[0].split(' ').join('-')
           var domPlotId = 'plot-breakdown-' + dataId
           return (
-            <div className="col-md-6 breakdown" id="' + domBlockId + '" key={dataId}>
-              <div className="panel panel-green">
-                <div className="panel-heading">
-                  <h3 className="panel-title"><i className="fa fa-check-circle"></i> Healthy</h3>
-                  <span className="pull-right clickable" data-effect="fadeOut"><i className="fa fa-thumb-tack"></i></span>
-                </div>
-                <div className="panel-body">
-                  <div className="plot" id={domPlotId}></div>
-                </div>
-              </div>
-            </div>
+            <TimeSeriesSubplotSnippet data={data} domId={domPlotId} key={dataId}/>
           )
         })}
       </div>
@@ -98,28 +86,12 @@ class TimeSeriesSubplot extends Component {
 
   componentDidUpdate() {
     // var newData = allData[i]
-    console.log(this.state.subData)
-    this.state.subData.forEach(function (data) {
+    // console.log(this.state.subData)
+    
+    /* this.state.subData.forEach(function (data) {
       var dataId = data[0].split(' ').join('-')
-      var domPlotId = 'plot-breakdown-' + dataId
-      var newChart = c3.generate({
-          data: {
-              columns: [
-                  data
-              ],
-              type: 'spline'
-          },
-          axis: {
-            y: {
-              tick: {
-                format: d3.format('.4')
-              }
-            }
-          }
-      });
-      console.log($("#" + domPlotId))
-      $("#" + domPlotId).append(newChart.element)
-    })
+      
+    })*/
   }
 }
 
@@ -130,12 +102,39 @@ class TimeSeriesSubplotSnippet extends Component {
 
   render() {
     return (
-      <div className="row" id="plot-breakdown">
+      <div className="col-md-6 breakdown" id="' + domBlockId + '">
+        <div className="panel panel-green">
+          <div className="panel-heading">
+            <h3 className="panel-title"><i className="fa fa-check-circle"></i> Healthy</h3>
+            <span className="pull-right clickable" data-effect="fadeOut"><i className="fa fa-thumb-tack"></i></span>
+          </div>
+          <div className="panel-body">
+            <div className="plot" id={this.props.domId}></div>
+          </div>
+        </div>
       </div>
     )
   }
 
   componentDidMount() {
+    var domPlotId = this.props.domId
+    var data = this.props.data
+    var newChart = c3.generate({
+        data: {
+            columns: [
+                data
+            ],
+            type: 'spline'
+        },
+        axis: {
+          y: {
+            tick: {
+              format: d3.format('.4')
+            }
+          }
+        }
+    });
+    $("#" + domPlotId).append(newChart.element)
   }
 }
 

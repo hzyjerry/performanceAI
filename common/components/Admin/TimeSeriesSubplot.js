@@ -16,15 +16,15 @@ class TimeSeriesSubplot extends Component {
 
   render() {
     var subData = this.state.subData
-    console.log(subData)
+    // console.log(subData)
     return (
       <div className="row" id="plot-breakdown">
         <Element name="time-series-subplot">
-          {this.state.subData.map(function (data) {
-            var dataId = data[0].split(' ').join('-')
+          {this.state.subData.map(function (sub) {
+            var dataId = sub.data[0].split(' ').join('-')
             var domPlotId = 'plot-breakdown-' + dataId
             return (
-              <TimeSeriesSubplotSnippet data={data} domId={domPlotId} key={dataId}/>
+              <TimeSeriesSubplotSnippet data={sub.data} domId={domPlotId} key={dataId} healthy={sub.health}/>
             )
           })}
         </Element>
@@ -44,21 +44,8 @@ class TimeSeriesSubplotSnippet extends Component {
   constructor(props) {
     super(props)
     this.handleClick = this.handleClick.bind(this)
-    if (props.healthy || props.healthy === undefined) {
-      this.state = {
-        healthy: true,
-        icon: "fa fa-check-circle",
-        panel: "panel panel-green",
-        title: " Healthy"
-      }
-    } else {
-      this.state = {
-        healthy: false,
-        icon: "fa fa-exclamation-triangle",
-        panel: "panel panel-red",
-        title: " Unhealthy"
-      }
-    }
+    this.getStateHealthy = this.getStateHealthy.bind(this)
+    this.state = this.getStateHealthy(props.healthy || props.healthy === undefined)
   }
 
   render() {
@@ -80,22 +67,7 @@ class TimeSeriesSubplotSnippet extends Component {
   handleClick() {
     // Plug in used for switching subplot color
     var state = this.state
-    if (state.healthy) {
-      state = {
-        healthy: false,
-        icon: "fa fa-exclamation-triangle",
-        panel: "panel panel-red",
-        title: " Unhealthy"
-      }
-    } else {
-      state = {
-        healthy: true,
-        icon: "fa fa-check-circle",
-        panel: "panel panel-green",
-        title: " Healthy"
-      }
-    }
-    this.setState(state)
+    this.setState(this.getStateHealthy(!state.healthy))
   }
 
   componentDidMount() {
@@ -120,6 +92,7 @@ class TimeSeriesSubplotSnippet extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    this.setState(this.getStateHealthy(nextProps.healthy))
     var domPlotId = nextProps.domId
     var data = nextProps.data
     var newChart = c3.generate({
@@ -139,6 +112,24 @@ class TimeSeriesSubplotSnippet extends Component {
     });
     $("#" + domPlotId).children().remove()
     $("#" + domPlotId).append(newChart.element)
+  }
+
+  getStateHealthy(healthy) {
+    if (healthy) {
+      return {
+        healthy: true,
+        icon: "fa fa-check-circle",
+        panel: "panel panel-green",
+        title: " Healthy"
+      }
+    } else {
+      return {
+        healthy: false,
+        icon: "fa fa-exclamation-triangle",
+        panel: "panel panel-red",
+        title: " Unhealthy"
+      }
+    }
   }
 }
 

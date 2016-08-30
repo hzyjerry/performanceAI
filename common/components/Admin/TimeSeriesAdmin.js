@@ -40,17 +40,20 @@ class TimeSeriesAdmin extends Component {
     this.setState({subData: [], confirmedSelection: []})
   }
 
-  populateData() {
+  populateData(health) {
     var data = this.state.plotAllData.data()
     var subData = []
     var confirmedSelection = []
     var plotAllData = this.state.plotAllData
-    console.log(plotAllData.selected())
+    // console.log(plotAllData.selected())
     for (var i = 0; i < data.length; i++){
       var dataId = data[i].id.split(' ').join('-')
       var dataSelected = plotAllData.selected(dataId)
       confirmedSelection.push(dataId)
-      subData.push(this.getPlainArray(plotAllData.selected(data[i].id)))
+      subData.push({
+        data: this.getPlainArray(plotAllData.selected(data[i].id)),
+        health: health? health[data[i].id]: true
+      })
     }
     // console.log(subData, confirmedSelection)
     this.setState({subData: subData, confirmedSelection: confirmedSelection})
@@ -67,7 +70,7 @@ class TimeSeriesAdmin extends Component {
       var plotAllData = self.state.plotAllData
       plotAllData.unselect()
       plotAllData.select([], Array.apply(null, Array(record.end - record.start)).map(function (_, i) {return i + record.start;}))
-      self.populateData()
+      self.populateData(record.dataHealth)
     }
   }
 

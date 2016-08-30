@@ -5,6 +5,9 @@ import setUpTime from './setUpTime'
 class TimeSeriesSubplot extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      subData: [],                  /* Made of plain arrays */
+    }
   }
 
   render() {
@@ -63,17 +66,60 @@ class TimeSeriesSubplot extends Component {
       $('.selected').goTo()
     }, 500)
     */
-
+    var subData = this.props.subData
+    console.log("render")
+    console.log(this.state.subData)
     return (
       <div className="row" id="plot-breakdown">
-        {this.props.subData.map((data) =>
-          <h> data </h>
-        )}
+        {this.state.subData.map(function (data) {
+          var dataId = data[0].split(' ').join('-')
+          var domPlotId = 'plot-breakdown-' + dataId
+          return (
+            <div className="col-md-6 breakdown" id="' + domBlockId + '" key={dataId}>
+              <div className="panel panel-green">
+                <div className="panel-heading">
+                  <h3 className="panel-title"><i className="fa fa-check-circle"></i> Healthy</h3>
+                  <span className="pull-right clickable" data-effect="fadeOut"><i className="fa fa-thumb-tack"></i></span>
+                </div>
+                <div className="panel-body">
+                  <div className="plot" id={domPlotId}></div>
+                </div>
+              </div>
+            </div>
+          )
+        })}
       </div>
     )
   }
 
-  componentDidMount() {
+  componentWillReceiveProps(nextProps) {
+    this.setState({subData: nextProps.subData})
+  }
+
+  componentDidUpdate() {
+    // var newData = allData[i]
+    console.log(this.state.subData)
+    this.state.subData.forEach(function (data) {
+      var dataId = data[0].split(' ').join('-')
+      var domPlotId = 'plot-breakdown-' + dataId
+      var newChart = c3.generate({
+          data: {
+              columns: [
+                  data
+              ],
+              type: 'spline'
+          },
+          axis: {
+            y: {
+              tick: {
+                format: d3.format('.4')
+              }
+            }
+          }
+      });
+      console.log($("#" + domPlotId))
+      $("#" + domPlotId).append(newChart.element)
+    })
   }
 }
 

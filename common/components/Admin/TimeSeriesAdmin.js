@@ -10,6 +10,7 @@ class TimeSeriesAdmin extends Component {
     super(props)
     this.handleConfirm = this.handleConfirm.bind(this)
     this.handleUndoSelect = this.handleUndoSelect.bind(this)
+    this.getPlainArray = this.getPlainArray.bind(this)
 
     this.state = {
       plotAllData: null, 
@@ -32,13 +33,26 @@ class TimeSeriesAdmin extends Component {
 
       // var domPlotId = 'plot-breakdown-' + dataId
       // var domBlockId = 'block-' + dataId
-      subData.push(getPlainArray(plotAllData.selected(allData[i].id)))
+      subData.push(this.getPlainArray(plotAllData.selected(allData[i].id)))
     }
     this.setState({subData: subData, confirmedSelection: confirmedSelection})
   }
 
   handleUndoSelect() {
+    var plotAllData = this.state.plotAllData
+    plotAllData.unselect()
     this.setState({subData: [], confirmedSelection: []})
+  }
+
+  /* Transform the selected data type to target plain array type */
+  getPlainArray(selectedArray) {
+    if (!selectedArray || selectedArray.length === 0)
+      return []
+    var plain = [selectedArray[0].id]
+    for (var i = 0; i < selectedArray.length; i++) {
+      plain.push(selectedArray[i].value)
+    }
+    return plain
   }
 
   render() {
@@ -139,7 +153,7 @@ class TimeSeriesAdmin extends Component {
         formattedData.time_series_columns.push(dataArray)
       }
     })(timeSeriesDataAll)
-    
+
     var plotAllData = c3.generate({
         bindto: "#plot-all-data",
         data: {

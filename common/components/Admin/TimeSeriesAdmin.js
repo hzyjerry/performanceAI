@@ -106,7 +106,7 @@ class TimeSeriesAdmin extends Component {
                     </a>
                     <a href="#" className="list-group-item">
                         <span className="badge">Wai Ip</span>
-                        <i className="fa fa-fw fa-money"></i> Potential Memory Leak
+                        <i className="fa fa-fw fa-comment"></i> Potential Memory Leak
                     </a>
                     <a href="#" className="list-group-item">
                         <span className="badge">Wai Ip</span>

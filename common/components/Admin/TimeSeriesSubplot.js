@@ -15,29 +15,6 @@ class TimeSeriesSubplot extends Component {
   }
 
   render() {
-    /*
-    // Plug in used for switching subplot color
-    $('.clickable').on('click',function(){
-      var parent = $(this).closest(".panel")
-      var title = $(this).siblings(".panel-title")
-      var icon = parent.find('.panel-title > .fa')
-      if (parent.hasClass('panel-green')) {
-        parent.removeClass('panel-green').addClass('panel-red')
-        title.html('<i class="fa fa-exclamation-triangle"></i> Unhealthy')
-      } else {
-        parent.removeClass('panel-red').addClass('panel-green')
-        title.html('<i class="fa fa-check-circle"></i> Healthy')
-      }
-    })
-
-    $( "div.selected" ).hide();
-    $( "div.selected" ).fadeIn();
-
-        // displayPlot()
-    setTimeout(function() {
-      $('.selected').goTo()
-    }, 500)
-    */
     var subData = this.props.subData
     return (
       <div className="row" id="plot-breakdown">
@@ -65,15 +42,22 @@ class TimeSeriesSubplot extends Component {
 class TimeSeriesSubplotSnippet extends Component {
   constructor(props) {
     super(props)
+    this.handleClick = this.handleClick.bind(this)
+    this.state = {
+      healthy: true,
+      icon: "fa fa-check-circle",
+      panel: "panel panel-green",
+      title: " Healthy"
+    }
   }
 
   render() {
     return (
-      <div className="col-md-6 breakdown" id="' + domBlockId + '">
-        <div className="panel panel-green">
+      <div className="col-md-6 breakdown">
+        <div className={this.state.panel}>
           <div className="panel-heading">
-            <h3 className="panel-title"><i className="fa fa-check-circle"></i> Healthy</h3>
-            <span className="pull-right clickable" data-effect="fadeOut"><i className="fa fa-thumb-tack"></i></span>
+            <h3 className="panel-title"><i className={this.state.icon}></i> {this.state.title}</h3>
+            <span className="pull-right clickable" data-effect="fadeOut" onClick={this.handleClick}><i className="fa fa-thumb-tack"></i></span>
           </div>
           <div className="panel-body">
             <div className="plot" id={this.props.domId}></div>
@@ -81,6 +65,27 @@ class TimeSeriesSubplotSnippet extends Component {
         </div>
       </div>
     )
+  }
+
+  handleClick() {
+    // Plug in used for switching subplot color
+    var state = this.state
+    if (state.healthy) {
+      state = {
+        healthy: false,
+        icon: "fa fa-exclamation-triangle",
+        panel: "panel panel-red",
+        title: " Unhealthy"
+      }
+    } else {
+      state = {
+        healthy: true,
+        icon: "fa fa-check-circle",
+        panel: "panel panel-green",
+        title: " Healthy"
+      }
+    }
+    this.setState(state)
   }
 
   componentDidMount() {

@@ -16,6 +16,7 @@ class TimeSeriesSubplot extends Component {
 
   render() {
     var subData = this.state.subData
+    var self = this
     // console.log(subData)
     return (
       <div className="row" id="plot-breakdown">
@@ -24,7 +25,7 @@ class TimeSeriesSubplot extends Component {
             var dataId = sub.data[0].split(' ').join('-')
             var domPlotId = 'plot-breakdown-' + dataId
             return (
-              <TimeSeriesSubplotSnippet data={sub.data} domId={domPlotId} key={dataId} healthy={sub.health}/>
+              <TimeSeriesSubplotSnippet data={sub.data} domId={domPlotId} key={dataId} name={sub.data[0]} healthy={sub.health} healthReset={self.props.healthReset}/>
             )
           })}
         </Element>
@@ -45,6 +46,7 @@ class TimeSeriesSubplotSnippet extends Component {
     super(props)
     this.handleClick = this.handleClick.bind(this)
     this.getStateHealthy = this.getStateHealthy.bind(this)
+    this.handleClick = this.handleClick.bind(this)
     this.state = this.getStateHealthy(props.healthy || props.healthy === undefined)
   }
 
@@ -67,7 +69,9 @@ class TimeSeriesSubplotSnippet extends Component {
   handleClick() {
     // Plug in used for switching subplot color
     var state = this.state
-    this.setState(this.getStateHealthy(!state.healthy))
+    var health = this.getStateHealthy(!state.healthy)
+    this.setState(health)
+    this.props.healthReset(this.props.name, health.healthy)
   }
 
   componentDidMount() {

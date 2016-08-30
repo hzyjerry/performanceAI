@@ -19,13 +19,15 @@ class TimeSeriesAdmin extends Component {
     this.populateData = this.populateData.bind(this)
     this.submitSelect = this.submitSelect.bind(this)
     this.handleSummaryChange = this.handleSummaryChange.bind(this)
+    this.healthReset = this.healthReset.bind(this)
 
     this.state = {
       plotAllData: null, 
       subData: [],                  /* Made of plain arrays */
       confirmedSelection: [],
       records: timeRecord,
-      summary: "What's the performance issue with the selected period..."
+      summary: "",
+      health: {}
     }
   }
 
@@ -34,6 +36,12 @@ class TimeSeriesAdmin extends Component {
     var confirmedSelection = this.state.confirmedSelection
     if (confirmedSelection.length > 0 || plotAllData.selected().length === 0)
       return
+    var initHealth = {}
+    var data = plotAllData.data()
+    for (var i = 0; i < data.length; i++) {
+      initHealth[data[i].id] = true
+    }
+    this.setState({"health": initHealth})
     this.populateData()
   }
 
@@ -44,10 +52,10 @@ class TimeSeriesAdmin extends Component {
   }
 
   populateData(health) {
-    var data = this.state.plotAllData.data()
+    var plotAllData = this.state.plotAllData
+    var data = plotAllData.data()
     var subData = []
     var confirmedSelection = []
-    var plotAllData = this.state.plotAllData
     // console.log(plotAllData.selected())
     for (var i = 0; i < data.length; i++){
       var dataId = data[i].id.split(' ').join('-')
@@ -88,6 +96,13 @@ class TimeSeriesAdmin extends Component {
     return plain
   }
 
+  healthReset(key, healthy) {
+    var health = this.state.health
+    health[key] = healthy
+    console.log(health)
+    this.setState({health: health})
+  }
+
   submitSelect() {
     var plotAllData = this.state.plotAllData
     var selectedData = plotAllData.selected()
@@ -96,11 +111,7 @@ class TimeSeriesAdmin extends Component {
       summary: this.state.summary,
       start: selectedData[0].x,
       end: selectedData[selectedData.length - 1].x,
-      dataHealth: {
-        "CPU Usage": false,
-        "Memory Usage": true,
-        "Disk PG Steal": true,
-      }
+      dataHealth: this.state.health
     }
     this.setState({records: timeRecord})
 
@@ -169,7 +180,7 @@ class TimeSeriesAdmin extends Component {
           <div className="selected col-md-6">
             <div className="form-group">
               <label>Comment on performance</label>
-              <textarea className="form-control" rows="3" value={this.state.summary} onChange={self.handleSummaryChange}></textarea>
+              <textarea className="form-control" rows="3" placeholder="What's the performance issue with the selected period..." value={this.state.summary} onChange={self.handleSummaryChange}></textarea>
             </div>
             <button type="submit" className="btn btn-default" onClick={this.submitSelect}>Submit Button</button>
             <button type="reset" className="btn btn-default">Reset Button</button>
@@ -178,7 +189,7 @@ class TimeSeriesAdmin extends Component {
 
         <br/>
 
-        <TimeSeriesSubplot subData={this.state.subData}/>
+        <TimeSeriesSubplot subData={this.state.subData} healthReset={this.healthReset}/>
       </div>
     )
   }
